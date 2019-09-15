@@ -1,0 +1,26 @@
+* Hostname in DNS cache was stale, zapped
+*   Trying 202.152.17.10...
+* TCP_NODELAY set
+* Connected to 202.152.17.10 (202.152.17.10) port 80 (#0)
+> POST /rest-api/Service/Biodata/Tambah HTTP/1.1
+Host: 202.152.17.10
+Accept: */*
+X-Api-Key:Dev-Rest-API-2019
+content-type:application/json
+Content-Type: application/json
+Content-Length: 2
+
+* upload completely sent off: 2 out of 2 bytes
+< HTTP/1.1 400 Bad Request
+< Date: Wed, 15 May 2019 09:41:33 GMT
+< Server: CentOS WebPanel: Protected by Mod Security
+< X-Powered-By: PHP/5.6.40
+< Expires: Thu, 19 Nov 1981 08:52:00 GMT
+< Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+< Pragma: no-cache
+< Set-Cookie: PHPSESSID=4nhatvp022unavk097jqu1ntv3; path=/
+< Content-Type: application/json; charset=utf-8
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< 
+* Connection #0 to host 202.152.17.10 left intact
