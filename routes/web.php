@@ -12,63 +12,50 @@
 */
 
 Route::auth();
+// Route::group(['middleware' => 'authorization:working_schedule'], function(){
 
 Route::group(['middleware' => 'auth'], function(){
 	Route::get('', 'HomeController@index');
 
-	Route::group(['middleware' => 'auth.input.provinsi'], function(){
-
-		Route::resources(['file_manager' => 'FileManagerController']);
-
-		Route::resources(['pemohon' => 'PemohonController']);
-
-		Route::group(['prefix' => 'siki_personal'] , function(){
-			Route::get('{id}/plain', 'SikiPersonalController@plain');
-			Route::get('{id}/sync', 'SikiPersonalController@sync');
-			Route::get('{id}/proyek', 'SikiPersonalController@proyek');
-			Route::get('{id}/pendidikan', 'SikiPersonalController@pendidikan');
-			Route::get('{id}/pendidikan', 'SikiPersonalController@pendidikan');
-		});
-		Route::resources(['siki_personal' => 'SikiPersonalController']);
-
-		Route::group(['prefix' => 'siki_pendidikan'] , function(){
-			Route::get('{id}/sync', 'SikiPendidikanController@sync');
-		});
-
-		Route::group(['prefix' => 'siki_proyek'] , function(){
-			Route::get('{id}/sync', 'SikiProyekController@sync');
-		});
-
-		Route::group(['prefix' => 'siki_regta'] , function(){
-			Route::get('{id}/sync', 'SikiRegtaController@sync');
-			Route::get('{id}/approve', 'SikiRegtaController@approve');
-		});
-		Route::resources(['siki_regta' => 'SikiRegtaController']);
-
-		Route::group(['prefix' => 'siki_regtt'] , function(){
-			Route::get('{id}/sync', 'SikiRegttController@sync');
-			Route::get('{id}/approve', 'SikiRegttController@approve');
-		});
-		Route::resources(['siki_regtt' => 'SikiRegttController']);
-	});
-
-	Route::group(['middleware' => 'auth.approval'], function(){
+	Route::group(['middleware' => 'authorize:approval'], function(){
 		Route::get('approval_report', 'ApprovalController@report');
 
-		Route::group(['prefix' => 'approval_regta'] , function(){
-			Route::get('{id}/approve', 'ApprovalRegtaController@approve');
-		});
-		Route::resources(['approval_regta' => 'ApprovalRegtaController']);
+		Route::get('approval_0_regta/{id}/approve', 'ApprovalRegtaController@approve');
+		Route::resources(['approval_0_regta' => 'ApprovalRegtaController']);
 
-		Route::group(['prefix' => 'approval_regtt'] , function(){
-			Route::get('{id}/approve', 'ApprovalRegttController@approve');
-		});
-		Route::resources(['approval_regtt' => 'ApprovalRegttController']);
+		Route::get('approval_1_regta/{id}/approve', 'ApprovalRegtaStatus1Controller@approve');
+		Route::resources(['approval_1_regta' => 'ApprovalRegtaStatus1Controller']);
+
+		Route::get('approval_2_regta/{id}/approve', 'ApprovalRegtaStatus2Controller@approve');
+		Route::resources(['approval_2_regta' => 'ApprovalRegtaStatus2Controller']);
+
+		Route::get('approval_0_regtt/{id}/approve', 'ApprovalRegttController@approve');
+		Route::resources(['approval_0_regtt' => 'ApprovalRegttController']);
+
+		Route::get('approval_1_regtt/{id}/approve', 'ApprovalRegttStatus1Controller@approve');
+		Route::resources(['approval_1_regtt' => 'ApprovalRegttStatus1Controller']);
+
+		Route::get('approval_2_regtt/{id}/approve', 'ApprovalRegttStatus2Controller@approve');
+		Route::resources(['approval_2_regtt' => 'ApprovalRegttStatus2Controller']);
 	});
 
-	Route::group(['middleware' => 'auth.admin'], function(){
+	Route::group(['middleware' => 'authorize:biodata'], function(){
+		Route::get('biodata/upload_pendidikan', 'BiodataController@uploadPendidikan');
+		Route::get('biodata/upload_pengalaman', 'BiodataController@uploadPengalaman');
+		Route::get('biodata/upload_organisasi', 'BiodataController@uploadOrganisasi');
+		Route::get('biodata/upload_kursus', 'BiodataController@uploadKursus');
+		Route::get('biodata/upload_ska', 'BiodataController@uploadSKA');
+		Route::get('biodata/upload_skt', 'BiodataController@uploadSKT');
+		Route::resources(['biodata' => 'BiodataController']);
+		Route::get('biodata/{id}/upload', 'BiodataController@upload');
+	});
+
+	Route::group(['middleware' => 'authorize:user'], function(){
 		Route::resources([
 		    'users' => 'UserController',
+		]);
+		Route::resources([
+			'user_role' => 'UserRoleController',
 		]);
 	});
 	

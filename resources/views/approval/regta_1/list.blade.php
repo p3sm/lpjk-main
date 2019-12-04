@@ -77,7 +77,7 @@
                             <td>{{$result->ID_Propinsi_reg}}</td>
                             <td>{{$result->id_unit_sertifikasi}}</td>
                             <td>
-                              <a data-team="{{($role == 1 || $role == 2) ? "1" : "0"}}" href="{{url("approval_0_regta/" . $result->ID_Asosiasi_Profesi . "/approve") . '?' . http_build_query($result)}}" class="btn btn-primary btn-xs approve">Approve</a>
+                              <a data-team="{{($role == 1 || $role == 2) ? "1" : "0"}}" href="{{url("approval_1_regta/" . $result->ID_Asosiasi_Profesi . "/approve") . '?' . http_build_query($result)}}" class="btn btn-primary btn-xs approve">Approve</a>
                             </td>
                           </tr>
                         @endforeach

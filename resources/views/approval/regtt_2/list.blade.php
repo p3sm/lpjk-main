@@ -16,13 +16,13 @@
 <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <a href="{{url("approval_regta")}}" class="btn btn-danger btn-sm"><i class="fa fa-arrow-left"></i> kembali</a> 
+        <a href="{{url("siki_regta")}}" class="btn btn-danger btn-sm"><i class="fa fa-arrow-left"></i> kembali</a> 
         {{-- Data Registrasi Tenaga Ahli - Tahap {{count($regtas) > 0 ? $regtas[0]->tahap1 : "-"}} --}}
         {{--  <small>it all starts here</small>  --}}
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{url("approval_regta")}}">Approval Tenaga Ahli</a></li>
+        <li><a href="{{url("siki_regta")}}">Approval Tenaga Trampil</a></li>
         {{-- <li class="active"><a href="#">{{count($regtas) > 0 ? $regtas[0]->tahap1 : "-"}}</a></li> --}}
       </ol>
     </section>
@@ -52,35 +52,35 @@
                 <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th>No.</th>
-                            <th>NIK</th>
-                            <th>Nama</th>
-                            <th>Sub Bidang</th>
-                            <th>Asosiasi</th>
-                            <th>Kualifikasi</th>
-                            <th>Tgl Registrasi</th>
-                            <th>Provinsi</th>
-                            <th>Unit Sertifikasi</th>
-                            <th>Action</th>
+                          <th>No.</th>
+                          <th>NIK</th>
+                          <th>Nama</th>
+                          <th>Sub Bidang</th>
+                          <th>Asosiasi</th>
+                          <th>Kualifikasi</th>
+                          <th>Tgl Registrasi</th>
+                          <th>Provinsi</th>
+                          <th>Unit Sertifikasi</th>
+                          <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($results as $k => $result)
-                          <tr>
-                            <td>{{$k + 1}}</td>
-                            <td>{{$result->ID_Personal}}</td>
-                            <td>{{$result->Nama}}</td>
-                            <td>{{$result->ID_Sub_Bidang}}</td>
-                            <td>{{$result->ID_Asosiasi_Profesi}}</td>
-                            <td>{{$result->ID_Kualifikasi}}</td>
-                            <td>{{$result->Tgl_Registrasi}}</td>
-                            <td>{{$result->ID_Propinsi_reg}}</td>
-                            <td>{{$result->id_unit_sertifikasi}}</td>
-                            <td>
-                              <a data-team="{{($role == 1 || $role == 2) ? "1" : "0"}}" href="{{url("approval_0_regta/" . $result->ID_Asosiasi_Profesi . "/approve") . '?' . http_build_query($result)}}" class="btn btn-primary btn-xs approve">Approve</a>
-                            </td>
-                          </tr>
-                        @endforeach
+                      @foreach($results as $k => $result)
+                        <tr>
+                          <td>{{$k + 1}}</td>
+                          <td>{{$result->ID_Personal}}</td>
+                          <td>{{$result->Nama}}</td>
+                          <td>{{$result->ID_Sub_Bidang}}</td>
+                          <td>{{$result->ID_Asosiasi_Profesi}}</td>
+                          <td>{{$result->ID_Kualifikasi}}</td>
+                          <td>{{$result->Tgl_Registrasi}}</td>
+                          <td>{{$result->ID_Kualifikasi}}</td>
+                          <td>{{$result->id_unit_sertifikasi}}</td>
+                          <td>
+                              <a data-team="{{($role == 1 || $role == 2) ? "1" : "0"}}"  href="{{url("approval_2_regtt/" . $result->ID_Asosiasi_Profesi . "/approve") . '?' . http_build_query($result)}}" class="btn btn-primary btn-xs approve">Approve</a>
+                          </td>
+                        </tr>
+                      @endforeach
                     </tbody>
                    
                 </table>

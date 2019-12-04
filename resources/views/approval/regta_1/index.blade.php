@@ -22,7 +22,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{url("approval_0_regta")}}">Approval Tenaga Ahli</a></li>
+        <li><a href="{{url("approval_1_regta")}}">Approval Tenaga Ahli</a></li>
         {{-- <li class="active"><a href="#">{{count($regtas) > 0 ? $regtas[0]->tahap1 : "-"}}</a></li> --}}
       </ol>
     </section>
@@ -33,10 +33,10 @@
       <!-- Default box -->
       <div class="box">
         <div class="box-body">
-          <a href="{{url('approval_0_regta/142')}}" class="btn btn-warning btn-lg">
+          <a href="{{url('approval_1_regta/142')}}" class="btn btn-warning btn-lg">
             ASTEKINDO
           </a>
-          <a href="{{url('approval_0_regta/148')}}" class="btn btn-warning btn-lg">
+          <a href="{{url('approval_1_regta/148')}}" class="btn btn-warning btn-lg">
             GATAKI
           </a>
         </div>

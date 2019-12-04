@@ -8,12 +8,12 @@
 <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Users Management
+        Pengelolaan Role
         {{--  <small>it all starts here</small>  --}}
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><a href="#">Users</a></li>
+        <li class="active"><a href="#">Role</a></li>
       </ol>
     </section>
 
@@ -22,9 +22,6 @@
 
       <!-- Default box -->
       <div class="box">
-        <div class="box-header with-border">
-          <h3 class="box-title">User Lists</h3>
-        </div>
         <div class="box-body">
             @if(session()->get('success'))
             <div class="alert alert-success">
@@ -33,7 +30,7 @@
             @endif
             {{--  sub menu  --}}
             <div style="margin-bottom: 20px">
-                 <a href="{{url('users/create')}}" class="btn bg-olive"><span>Add User</span></a>
+                 <a href="{{url('user_role/create')}}" class="btn bg-olive"><span>Input</span></a>
             </div>
             {{--  end of sub menu  --}}
 
@@ -43,30 +40,24 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Name</th>
-                            <th>Username</th>
-                            <th>Role</th>
-                            <th>Date added</th>
-                            <th>Active</th>
+                            <th>Nama</th>
+                            <th>Permission</th>
                             <th>Action</th>
                         </tr>
                     </thead>
-                   <tbody>
-                    @foreach($user as $k => $d)
-                    <tr>
-                        <td>{{$k + 1}}</td>
-                        <td>{{$d->name}}</td>
-                        <td>{{$d->username}}</td>
-                        <td>{{$d->role->name}}</td>
-                        <td>{{$d->created_at}}</td>
-                        <td><div class="label label-{{$d->is_active ? "success" : "danger"}}">{{$d->is_active ? "Active" : "Inactive"}}</div></td>
-                        <td>
-                            <a href="{{url('users/' . $d->id . '/edit')}}" class="btn btn-warning btn-xs"><span class='glyphicon glyphicon-pencil'></span></a>
-                            <button class='btn btn-xs btn-danger delete' data-id="{{$d->id}}" data-name="{{$d->name}}"><span class='glyphicon glyphicon-trash'></span></button></td>
-                        </td>
-                    </tr>
-                    @endforeach
-                   </tbody>
+                    <tbody>
+                        @foreach($role as $k => $d)
+                        <tr>
+                            <td>{{$k + 1}}</td>
+                            <td>{{$d->name}}</td>
+                            <td>{{$d->permission->count()}} permission(s)</td>
+                            <td>
+                                <a href="{{url('user_role/' . $d->id . '/edit')}}" class="btn btn-warning btn-xs"><span class='glyphicon glyphicon-pencil'></span></a>
+                                <button class='btn btn-xs btn-danger delete' data-id="{{$d->id}}" data-name="{{$d->name}}"><span class='glyphicon glyphicon-trash'></span></button></td>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
             {{--  end of user data  --}}
@@ -123,7 +114,7 @@ $(function(){
         });
         $.ajax(
         {
-            url: "users/"+id,
+            url: "user_role/"+id,
             type: 'delete', // replaced from put
             dataType: "JSON",
             data: {

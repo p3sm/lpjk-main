@@ -17,12 +17,12 @@
     <section class="content-header">
       <h1>
         {{-- <a href="{{url("siki_regta")}}" class="btn btn-danger btn-sm"><i class="fa fa-arrow-left"></i> kembali</a>  --}}
-        Pilih Asosiasi
+        Cari Biodata
         {{--  <small>it all starts here</small>  --}}
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{url("approval_0_regta")}}">Approval Tenaga Ahli</a></li>
+        <li><a href="{{url("approval_regta")}}">Biodata</a></li>
         {{-- <li class="active"><a href="#">{{count($regtas) > 0 ? $regtas[0]->tahap1 : "-"}}</a></li> --}}
       </ol>
     </section>
@@ -33,12 +33,21 @@
       <!-- Default box -->
       <div class="box">
         <div class="box-body">
-          <a href="{{url('approval_0_regta/142')}}" class="btn btn-warning btn-lg">
-            ASTEKINDO
-          </a>
-          <a href="{{url('approval_0_regta/148')}}" class="btn btn-warning btn-lg">
-            GATAKI
-          </a>
+          <form action="{{url("biodata")}}" method="post">
+            @csrf
+
+            <div class="box-body">
+              <div class="form-group">
+                <label for="id_personal">ID Personal</label>
+                <input type="text" class="form-control" name="id_personal" id="id_personal" placeholder="Enter ID Personal" required>
+              </div>
+            </div>
+            <!-- /.box-body -->
+
+            <div class="box-footer">
+              <button type="submit" name="submit" class="btn btn-primary">Search</button>
+            </div>
+          </form>
         </div>
         <!-- /.box-body -->
         <div class="box-footer"></div>

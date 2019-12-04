@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>LPJKP RIAU</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
@@ -68,11 +68,16 @@
 
             <div class="content">
                 <div class="title m-b-md">
-				You cannot access this page! This is for only "{{$role}}"
+				Sorry, You cannot access this page <br> You need "{{$role}}" access
                 </div>
                 <div class="links">
                     <a href="{{ url('') }}">Go Home Page</a>
                 </div>
+                <br>
+                <form method="post" action="{{ url('logout') }}" style="display: inline">
+                    {{ csrf_field() }}
+                  <button class="btn btn-default" type="submit">Sign Out</button>
+                </form>
             </div>
         </div>
     </body>

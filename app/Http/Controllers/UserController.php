@@ -16,7 +16,8 @@ class UserController extends Controller
 	}
 
     public function index(){
-    	return view('user/index');
+        $data["user"] = User::where("is_active", ">=", 0)->get();
+    	return view('user/index')->with($data);
     }
 
     public function create(){

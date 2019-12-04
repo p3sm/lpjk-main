@@ -20,11 +20,35 @@ class ApprovalRegtaController extends Controller
      */
     public function index(Request $request)
     {
-        if(Auth::user()->asosiasi){
-            return redirect('/approval_regta/' . Auth::user()->asosiasi->asosiasi_id);
-        }
-        
-    	return view('approval/regta/index');
+        $key = ApiKey::first();
+
+        $postData = [
+            "status_99" => 1,
+            "id_status" => 99
+          ];
+
+        $curl = curl_init();
+        $header[] = "X-Api-Key:" . $key->lpjk_key;
+        $header[] = "Token:" . $key->token;
+        $header[] = "Content-Type:multipart/form-data";
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => env("LPJK_ENDPOINT") . "LPJK-Service/Klasifikasi/Get-TA",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => $postData,
+            CURLOPT_HTTPHEADER => $header,
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0
+        ));
+        $response = curl_exec($curl);
+
+        $obj = json_decode($response);
+
+        $data['response'] = $obj->response;
+        $data['results'] = $obj->response > 0 ? $obj->result : [];
+        $data['role'] = Auth::user()->role_id;
+
+    	return view('approval/regta/list')->with($data);
     }
 
     /**
@@ -56,33 +80,6 @@ class ApprovalRegtaController extends Controller
      */
     public function show($asosiasi_id)
     {
-        $asosiasi = ApiKey::first();
-
-        $postData = [
-            "status_99" => 0,
-            // "limit" => 10
-          ];
-
-        $curl = curl_init();
-        $header[] = "X-Api-Key:" . $asosiasi->lpjk_key;
-        $header[] = "Token:" . $asosiasi->token;
-        $header[] = "Content-Type:multipart/form-data";
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => env("LPJK_ENDPOINT") . "Service/Klasifikasi/Get-TA",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => $postData,
-            CURLOPT_HTTPHEADER => $header,
-        ));
-        $response = curl_exec($curl);
-
-        $obj = json_decode($response);
-
-        $data['response'] = $obj->response;
-        $data['results'] = $obj->response > 0 ? $obj->result : [];
-        $data['role'] = Auth::user()->role_id;
-
-    	return view('approval/regta/list')->with($data);
     }
 
     /**
@@ -121,14 +118,11 @@ class ApprovalRegtaController extends Controller
 
     public function approve(Request $request, $id)
     {
-        // exit;
-        // dd($request);
-        // $asosiasiId = 142;
-        $asosiasi = SikiAsosiasi::find($id);
-        // $reg = SikiRegta::find($id);
+        $key = ApiKey::first();
 
         $postData = [
           "id_personal"           => $request->query('ID_Personal'),
+          "id_asosiasi"           => $request->query('ID_Asosiasi_Profesi'),
           "id_sub_bidang"         => $request->query('ID_Sub_Bidang'),
           "id_kualifikasi"        => $request->query('ID_Kualifikasi'),
           "id_unit_sertifikasi"   => $request->query('id_unit_sertifikasi'),
@@ -136,15 +130,15 @@ class ApprovalRegtaController extends Controller
           "tahun"                 => Carbon::parse($request->query('Tgl_Registrasi'))->format("Y"),
           "id_provinsi"           => $request->query('ID_Propinsi_reg'),
           "id_permohonan"         => $request->query('id_permohonan'),
-          "id_status"             => 99,
+          "id_status"             => 0,
           "catatan"               => ""
         ];
 
         // dd($postData);
 
         $curl = curl_init();
-        $header[] = "X-Api-Key:" . $asosiasi->apikey->lpjk_key;
-        $header[] = "Token:" . $asosiasi->apikey->token;
+        $header[] = "X-Api-Key:" . $key->lpjk_key;
+        $header[] = "Token:" . $key->token;
         $header[] = "Content-Type:multipart/form-data";
         curl_setopt_array($curl, array(
             CURLOPT_URL => env("LPJK_ENDPOINT") . "Service/History/TA",
@@ -152,17 +146,19 @@ class ApprovalRegtaController extends Controller
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => $postData,
             CURLOPT_HTTPHEADER => $header,
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0
         ));
         $response = curl_exec($curl);
 
-        // dd($response);
+        // dd($header);
 
         // echo $response;
         // exit;
         
         if($obj = json_decode($response)){
             if($obj->response) {
-                $this->ApproveTransaction($request);
+                // $this->ApproveTransaction($request);
                 // if($this->createApproveLog($reg))
                 return redirect()->back()->with('success', $obj->message);
             }
