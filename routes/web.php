@@ -39,7 +39,7 @@ Route::group(['middleware' => 'auth'], function(){
 		Route::resources(['approval_2_regtt' => 'ApprovalRegttStatus2Controller']);
 	});
 
-	Route::group(['middleware' => 'authorize:biodata'], function(){
+	Route::group(['middleware' => 'authorize:data_personal'], function(){
 		Route::get('biodata/upload_pendidikan', 'BiodataController@uploadPendidikan');
 		Route::get('biodata/upload_pengalaman', 'BiodataController@uploadPengalaman');
 		Route::get('biodata/upload_organisasi', 'BiodataController@uploadOrganisasi');

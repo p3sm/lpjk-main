@@ -70,7 +70,7 @@
           </a>
         </li>
 
-        @if(Helpers::checkPermission('biodata'))
+        @if(Helpers::checkPermission('data_personal'))
         {{-- <li class="{{Request::is('file_manager') ? 'active' : ''}}">
             <a href="{{ url('file_manager') }}">
               <i class="fa fa-folder-open"></i> <span>File Manager</span>

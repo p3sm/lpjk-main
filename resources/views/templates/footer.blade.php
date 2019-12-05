@@ -2,6 +2,9 @@
 <script src="{{ asset('AdminLTE-2.3.11/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="{{ asset('AdminLTE-2.3.11/bootstrap/js/bootstrap.min.js')}}"></script>
+
+<script src="{{ asset('js/app.js') }}" defer></script>
+
 <!-- SlimScroll -->
 <script src="{{ asset('AdminLTE-2.3.11/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
 <!-- FastClick -->

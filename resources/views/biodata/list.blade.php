@@ -71,6 +71,11 @@
                   <th>Tenaga Kerja</th>
                   <th>Asosiasi</th>
                   <th>Email</th>
+                  <th>Pernyataan Kebenaran</th>
+                  <th>KTP</th>
+                  <th>NPWP</th>
+                  <th>Riwayat Hidup</th>
+                  <th>Photo</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -85,6 +90,11 @@
                     <td>{{$result->Tenaga_Kerja}}</td>
                     <td>{{$result->id_Asosiasi}}</td>
                     <td>{{$result->email}}</td>
+                    <td><a data-type="iframe" data-fancybox href={{$result->file ? $result->file["persyaratan_4"] : ""}}>View</a></td>
+                    <td><a data-type="iframe" data-fancybox href={{$result->file ? $result->file["persyaratan_5"] : ""}}>View</a></td>
+                    <td><a data-type="iframe" data-fancybox href={{$result->file ? $result->file["persyaratan_8"] : ""}}>View</a></td>
+                    <td><a data-type="iframe" data-fancybox href={{$result->file ? $result->file["persyaratan_11"] : ""}}>View</a></td>
+                    <td><a data-type="iframe" data-fancybox href={{$result->file ? $result->file["persyaratan_12"] : ""}}>View</a></td>
                     <td>
                       <a href="{{url("biodata/" . $result->id_Asosiasi . "/upload") . '?' . http_build_query($result)}}" class="btn btn-primary btn-xs">Upload</a>
                     </td>
@@ -106,6 +116,9 @@
                   <th>Jurusan</th>
                   <th>Tahun</th>
                   <th>No Ijazah</th>
+                  <th>Ijazah</th>
+                  <th>Keterangan</th>
+                  <th>Data Pendidikan</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -119,6 +132,9 @@
                   <td>{{$p->Jurusan}}</td>
                   <td>{{$p->Tahun}}</td>
                   <td>{{$p->No_Ijazah}}</td>
+                  <td><a data-type="iframe" data-fancybox href={{$p->file ? $p->file["persyaratan_6"] : "#"}}>View</a></td>
+                  <td><a data-type="iframe" data-fancybox href={{$p->file ? $p->file["persyaratan_7"] : "#"}}>View</a></td>
+                  <td><a data-type="iframe" data-fancybox href={{$p->file ? $p->file["persyaratan_15"] : "#"}}>View</a></td>
                   {{-- <td>{{$p->sync ? $p->sync->updated_at : "-"}}</td> --}}
                   {{-- <td>{{$p->sync ? $p->sync->id : "-"}}</td> --}}
                   <td><a href="{{url("biodata/upload_pendidikan") . '?' . http_build_query($p)}}" class="btn btn-primary btn-xs">Upload</a></td>
@@ -139,6 +155,7 @@
                   <th>Jabatan</th>
                   <th>Tanggal</th>
                   <th>Nilai</th>
+                  <th>Data Pengalaman</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -151,6 +168,7 @@
                   <td>{{$pr->Jabatan}}</td>
                   <td>{{\Carbon\Carbon::parse($pr->Tgl_Mulai)->format("d F Y")}} - {{\Carbon\Carbon::parse($pr->Tgl_Selesai)->format("d F Y")}}</td>
                   <td>{{number_format(preg_replace("/\D/","",$pr->Nilai), 0, ",", ".")}}</td>
+                  <td><a data-type="iframe" data-fancybox href={{$pr->file ? $pr->file["persyaratan_16"] : "#"}}>View</a></td>
                   {{-- <td>{{$pr->sync ? $pr->sync->updated_at : "-"}}</td> --}}
                   {{-- <td>{{$pr->sync ? $pr->sync->id : "-"}}</td> --}}
                   <td><a href="{{url("biodata/upload_pengalaman") . '?' . http_build_query($pr)}}" class="btn btn-primary btn-xs">Upload</a></td>
@@ -171,6 +189,7 @@
                   <th>Jabatan</th>
                   <th>Role_Pekerjaan</th>
                   <th>Tanggal</th>
+                  <th>Data Organisasi</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -183,6 +202,7 @@
                   <td>{{$org->Jabatan}}</td>
                   <td>{{$org->Role_Pekerjaan}}</td>
                   <td>{{\Carbon\Carbon::parse($org->Tgl_Mulai)->format("d F Y")}} - {{\Carbon\Carbon::parse($org->Tgl_Selesai)->format("d F Y")}}</td>
+                  <td><a data-type="iframe" data-fancybox href={{$org->file ? $org->file["persyaratan_18"] : "#"}}>View</a></td>
                   <td><a href="{{url("biodata/upload_organisasi") . '?' . http_build_query($org)}}" class="btn btn-primary btn-xs">Upload</a></td>
                 </tr>
                 @endforeach
@@ -201,6 +221,7 @@
                   <th>Nama</th>
                   <th>Sertifikat</th>
                   <th>Tahun</th>
+                  <th>Data Kursus</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -213,6 +234,7 @@
                   <td>{{$kur->Nama_Kursus}}</td>
                   <td>{{$kur->No_Sertifikat}}</td>
                   <td>{{$kur->Tahun}}</td>
+                  <td><a data-type="iframe" data-fancybox href={{$kur->file ? $kur->file["persyaratan_17"] : "#"}}>View</a></td>
                   <td><a href="{{url("biodata/upload_kursus") . '?' . http_build_query($kur)}}" class="btn btn-primary btn-xs">Upload</a></td>
                 </tr>
                 @endforeach
@@ -231,6 +253,11 @@
                   <th>Provinsi</th>
                   <th>USTK</th>
                   <th>Tgl Registrasi</th>
+                  <th>Status</th>
+                  <th>VVA</th>
+                  <th>Permohonan</th>
+                  <th>Permohonan Asosiasi</th>
+                  <th>Penilaian Mandiri</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -242,8 +269,13 @@
                   <td>{{$regta->ID_Asosiasi_Profesi}}</td>
                   <td>{{$regta->ID_Kualifikasi}}</td>
                   <td>{{$regta->ID_Propinsi_reg}}</td>
-                  <td>{{$regta->Tgl_Registrasi}}</td>
                   <td>{{$regta->id_unit_sertifikasi}}</td>
+                  <td>{{$regta->Tgl_Registrasi}}</td>
+                  <td>{{$regta->status_terbaru}}</td>
+                  <td><a data-type="iframe" data-fancybox href={{$regta->file ? $regta->file["persyaratan_1"] : "#"}}>View</a></td>
+                  <td><a data-type="iframe" data-fancybox href={{$regta->file ? $regta->file["persyaratan_2"] : "#"}}>View</a></td>
+                  <td><a data-type="iframe" data-fancybox href={{$regta->file ? $regta->file["persyaratan_3"] : "#"}}>View</a></td>
+                  <td><a data-type="iframe" data-fancybox href={{$regta->file ? $regta->file["persyaratan_13"] : "#"}}>View</a></td>
                   <td><a href="{{url("biodata/upload_ska") . '?' . http_build_query($regta)}}" class="btn btn-primary btn-xs">Upload</a></td>
                   {{-- <td>{{$regta->sync ? $regta->sync->updated_at{{--  : "-"}}</td>
                   <td>{{$regta->sync ? $regta->sync->sync_id : "-"}}</td> --}}
@@ -274,6 +306,10 @@
                   <th>Provinsi</th>
                   <th>USTK</th>
                   <th>Tgl Registrasi</th>
+                  <th>Status</th>
+                  <th>VVA</th>
+                  <th>Permohonan</th>
+                  <th>Permohonan Asosiasi</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -285,8 +321,12 @@
                   <td>{{$regtt->ID_Asosiasi_Profesi}}</td>
                   <td>{{$regtt->ID_Kualifikasi}}</td>
                   <td>{{$regtt->ID_propinsi_reg}}</td>
-                  <td>{{$regtt->Tgl_Registrasi}}</td>
                   <td>{{$regtt->id_unit_sertifikasi}}</td>
+                  <td>{{$regtt->Tgl_Registrasi}}</td>
+                  <td>{{$regtt->status_terbaru}}</td>
+                  <td><a data-type="iframe" data-fancybox href={{$regtt->file ? $regtt->file["persyaratan_1"] : "#"}}>View</a></td>
+                  <td><a data-type="iframe" data-fancybox href={{$regtt->file ? $regtt->file["persyaratan_2"] : "#"}}>View</a></td>
+                  <td><a data-type="iframe" data-fancybox href={{$regtt->file ? $regtt->file["persyaratan_3"] : "#"}}>View</a></td>
                   <td><a href="{{url("biodata/upload_skt") . '?' . http_build_query($regtt)}}" class="btn btn-primary btn-xs">Upload</a></td>
                 </tr>
                 @endforeach
