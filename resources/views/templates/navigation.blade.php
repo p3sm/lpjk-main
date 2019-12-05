@@ -89,7 +89,7 @@
         </li>
         @endif
 
-        @if(Helpers::checkPermission('approval'))
+        @if(Helpers::checkPermission('status_0'))
         <li class="treeview {{Request::is('approval_0*') ? 'active' : ''}}">
           <a href=""><i class="fa fa-tasks"></i><span>Approval Status 0</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
@@ -97,6 +97,8 @@
             <li class="{{Request::is('approval_0_regtt*') ? 'active' : ''}}"> <a href="{{ url('approval_0_regtt') }}"><span>Tenaga Trampil</span> </a> </li>
           </ul>
         </li>
+        @endif
+        @if(Helpers::checkPermission('status_1'))
         <li class="treeview {{Request::is('approval_1*') ? 'active' : ''}}">
           <a href=""><i class="fa fa-tasks"></i><span>Approval Status 1</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
@@ -104,6 +106,8 @@
             <li class="{{Request::is('approval_1_regtt*') ? 'active' : ''}}"> <a href="{{ url('approval_1_regtt') }}"><span>Tenaga Trampil</span> </a> </li>
           </ul>
         </li>
+        @endif
+        @if(Helpers::checkPermission('status_2'))
         <li class="treeview {{Request::is('approval_2*') ? 'active' : ''}}">
           <a href=""><i class="fa fa-tasks"></i><span>Approval Status 2</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
