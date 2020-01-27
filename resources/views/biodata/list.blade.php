@@ -83,6 +83,7 @@
                 @foreach($results as $k => $result)
                     @php
                         $result->Kodepos = $result->Kodepos == "" ? "-" : $result->Kodepos;
+                        $result->npwp = $result->npwp == "" && $result->Tenaga_Kerja == "TRAMPIL" ? "-" : $result->npwp;
                     @endphp
                   <tr>
                     <td>{{$k + 1}}</td>
