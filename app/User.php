@@ -43,4 +43,9 @@ class User extends Authenticatable
     {
       return $this->hasOne('App\UserAsosiasi');
     }
+    
+    public function profile()
+    {
+      return $this->hasOne('App\Profile', 'user_id');
+    }
 }

@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use App\ApprovalTransaction;
 use App\ApiKey;
 use App\TeamKontribusiTa;
+use App\Personal;
+use App\PersonalKursus;
+use App\PersonalOrganisasi;
+use App\PersonalPendidikan;
+use App\PersonalProyek;
+use App\PersonalRegTA;
+use App\PersonalRegTT;
 use App\PersonalRegTaSync;
 use App\PersonalRegTaApprove;
 use Carbon\Carbon;
@@ -82,6 +89,20 @@ class BiodataController extends Controller
         // dd($obj);
 
         try{
+          if($obj->response > 0){
+            $local = Personal::find($obj->result[0]->id_personal);
+            $obj->result[0]->file = null;
+  
+            if($local && $obj->response > 0){
+                $obj->result[0]->file = [
+                  "persyaratan_4" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_4,
+                  "persyaratan_5" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_5,
+                  "persyaratan_8" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_8,
+                  "persyaratan_11" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_11,
+                  "persyaratan_12" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_12,
+                ];
+            }
+          }
 
           $data['id_personal']   = $id_personal;
           $data['response']      = $obj->response;
@@ -93,7 +114,6 @@ class BiodataController extends Controller
           $data['kursus']        = $this->getKursus($id_personal);
           $data['klasifikasiTA'] = $this->getKlasifikasiTA($id_personal);
           $data['klasifikasiTT'] = $this->getKlasifikasiTT($id_personal);
-
 
           if($obj->response < 1)
             $request->session()->flash('error', $obj->message);
@@ -135,6 +155,21 @@ class BiodataController extends Controller
         // dd($obj);
 
         try{
+          
+          if($obj->response > 0){
+            foreach($obj->result as $key => $data){
+              $data->file = null;
+              $local = PersonalPendidikan::find($data->ID_Personal_Pendidikan);
+    
+              if($local){
+                  $data->file = [
+                    "persyaratan_6" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_6,
+                    "persyaratan_7" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_7,
+                    "persyaratan_15" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_15,
+                  ];
+              }
+            }
+          }
 
           $result = $obj->response > 0 ? $obj->result : [];
 
@@ -173,6 +208,19 @@ class BiodataController extends Controller
         // dd($obj);
 
         try{
+          
+          if($obj->response > 0){
+            foreach($obj->result as $key => $data){
+              $data->file = null;
+              $local = PersonalProyek::find($data->id_personal_proyek);
+    
+              if($local){
+                  $data->file = [
+                    "persyaratan_16" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_16,
+                  ];
+              }
+            }
+          }
 
           $result = $obj->response > 0 ? $obj->result : [];
 
@@ -211,6 +259,19 @@ class BiodataController extends Controller
         // dd($obj);
 
         try{
+          
+          if($obj->response > 0){
+            foreach($obj->result as $key => $data){
+              $data->file = null;
+              $local = PersonalOrganisasi::find($data->ID_Personal_Pengalaman);
+    
+              if($local){
+                  $data->file = [
+                    "persyaratan_18" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_18,
+                  ];
+              }
+            }
+          }
 
           $result = $obj->response > 0 ? $obj->result : [];
 
@@ -249,6 +310,19 @@ class BiodataController extends Controller
         // dd($obj);
 
         try{
+          
+          if($obj->response > 0){
+            foreach($obj->result as $key => $data){
+              $data->file = null;
+              $local = PersonalKursus::find($data->ID_Personal_Kursus);
+    
+              if($local){
+                  $data->file = [
+                    "persyaratan_17" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_17,
+                  ];
+              }
+            }
+          }
 
           $result = $obj->response > 0 ? $obj->result : [];
 
@@ -288,6 +362,22 @@ class BiodataController extends Controller
         // dd($obj);
 
         try{
+          
+          if($obj->response > 0){
+            foreach($obj->result as $key => $data){
+              $data->file = null;
+              $local = PersonalRegTA::find($data->ID_Registrasi_TK_Ahli);
+    
+              if($local){
+                  $data->file = [
+                    "persyaratan_1" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_1,
+                    "persyaratan_2" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_2,
+                    "persyaratan_3" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_3,
+                    "persyaratan_13" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_13,
+                  ];
+              }
+            }
+          }
 
           $result = $obj->response > 0 ? $obj->result : [];
 
@@ -327,6 +417,21 @@ class BiodataController extends Controller
         // dd($obj);
 
         try{
+          
+          if($obj->response > 0){
+            foreach($obj->result as $key => $data){
+              $data->file = null;
+              $local = PersonalRegTT::find($data->ID_Registrasi_TK_Trampil);
+    
+              if($local){
+                  $data->file = [
+                    "persyaratan_1" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_1,
+                    "persyaratan_2" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_2,
+                    "persyaratan_3" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_3,
+                  ];
+              }
+            }
+          }
 
           $result = $obj->response > 0 ? $obj->result : [];
 

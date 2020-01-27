@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\UserAsosiasi;
 use App\Role;
+use App\Asosiasi;
+use App\Provinsi;
 
 class UserController extends Controller
 {
@@ -21,16 +23,16 @@ class UserController extends Controller
     }
 
     public function create(){
-        $roles = Role::all()->sortBy("name");
+        $data["roles"] = Role::all()->sortBy("name");
+        $data["asosiasi"] = Asosiasi::all()->sortBy("nama");
+        $data["provinsi"] = Provinsi::all()->sortBy("nama");
 
-        return view('user/create', [
-            "roles" => $roles
-        ]);
+        return view('user/create')->with($data);
     }
 
     public function store(Request $request)
     {
-        $find = User::where("username", $request->get('username'));
+        $find = User::where("username", $request->get('username'))->first();
 
         if($find){
             return redirect('/users/create')->with('error', 'User sudah ada');
@@ -46,7 +48,8 @@ class UserController extends Controller
         if($user->save()){
             $uAsosiasi = new UserAsosiasi();
             $uAsosiasi->user_id = $user->id;
-            $uAsosiasi->asosiasi_id = $request->get('asosiasi');
+            $uAsosiasi->asosiasi_id = $request->get('asosiasi_id');
+            $uAsosiasi->provinsi_id = $request->get('provinsi_id');
             $uAsosiasi->save();
         }
 
@@ -60,13 +63,12 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-        $roles = Role::all()->sortBy("name");
+        $data["user"] = User::findOrFail($id);
+        $data["roles"] = Role::all()->sortBy("name");
+        $data["asosiasi"] = Asosiasi::all()->sortBy("nama");
+        $data["provinsi"] = Provinsi::all()->sortBy("nama");
 
-        return view('user/edit', [
-            "user" => $user,
-            "roles" => $roles
-        ]);
+        return view('user/edit')->with($data);
     }
 
     public function update(Request $request, $id)
@@ -82,8 +84,14 @@ class UserController extends Controller
         $user->role_id   = $request->get('role_id');
         $user->is_active = $request->get('is_active') ? 1 : 0;
 
-        $user->save();
-        return redirect('/users')->with('success', 'User berhasil diupdate');
+        if($user->save()){
+            $uAsosiasi = UserAsosiasi::where("user_id", $user->id)->first();
+            $uAsosiasi->asosiasi_id = $request->get('asosiasi_id');
+            $uAsosiasi->provinsi_id = $request->get('provinsi_id');
+            $uAsosiasi->save();
+            return redirect('/users')->with('success', 'User berhasil diupdate');
+        }
+        return redirect('/users')->with('error', 'User gagal diupdate');
     }
 
     public function destroy($id)

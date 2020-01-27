@@ -55,12 +55,25 @@
                     @endforeach
                   </select>
                 </div>
-	              <div class="form-group">
+				
+				<div class="form-group">
                   <label>Asosiasi</label>
-                  <select class="form-control" name="asosiasi" required>
-                    <option value="">-- Pilih Asosiasi --</option>
-                    <option value="142">ASTEKINDO</option>
-                    <option value="148">GATAKI</option>
+                  <select class="form-control" name="asosiasi_id">
+										<option value="">-- pilih asosiasi --</option>
+                    @foreach ($asosiasi as $as)
+                    <option value="{{$as->id_asosiasi}}">{{$as->nama}}</option>
+                    @endforeach
+                  </select>
+                </div>
+	              <div class="form-group">
+                  <label>Provinsi</label>
+                  <select class="form-control" name="provinsi_id">
+										<option value="">-- pilih provinsi --</option>
+										@foreach ($provinsi as $prov)
+											@if($prov->id_provinsi == "04")
+												<option value="{{$prov->id_provinsi}}" {{$prov->id_provinsi == "04" ? "selected" : ""}}>{{$prov->nama}}</option>
+											@endif
+                    @endforeach
                   </select>
                 </div>
 	              <div class="checkbox">

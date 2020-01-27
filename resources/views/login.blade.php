@@ -36,11 +36,17 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
+    
+    @if ($error = $errors->first())
+    <div class="alert alert-danger">
+      {{ $error }}
+    </div>
+  @endif
 
     <form action="{{ url('login') }}" method="post">
       {{ csrf_field() }}
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Username" name="username">
+        <input type="text" class="form-control" placeholder="Username" value="{{ old('username') }}" name="username">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
