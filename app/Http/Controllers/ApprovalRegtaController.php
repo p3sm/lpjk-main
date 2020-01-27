@@ -44,9 +44,13 @@ class ApprovalRegtaController extends Controller
 
         $obj = json_decode($response);
 
-        $data['response'] = $obj->response;
-        $data['results'] = $obj->response > 0 ? $obj->result : [];
-        $data['role'] = Auth::user()->role_id;
+        if($obj && $obj->response){
+            $data['response'] = $obj->response;
+            $data['results'] = $obj->response > 0 ? $obj->result : [];
+            $data['role'] = Auth::user()->role_id;
+        } else {
+            return redirect()->back()->with('error', "Terjadi kesalahan saat mengambil data, silakan coba lagi");
+        }
 
     	return view('approval/regta/list')->with($data);
     }
@@ -158,7 +162,7 @@ class ApprovalRegtaController extends Controller
         
         if($obj = json_decode($response)){
             if($obj->response) {
-                // $this->ApproveTransaction($request);
+                $this->ApproveTransaction($request);
                 // if($this->createApproveLog($reg))
                 return redirect()->back()->with('success', $obj->message);
             }
@@ -169,17 +173,9 @@ class ApprovalRegtaController extends Controller
     }
 
     public function ApproveTransaction($request){
-        
-        $teamKontribusi = TeamKontribusiTa::where("team_id", $request->query('team'))
-        ->where("id_asosiasi_profesi", $request->query('ID_Asosiasi_Profesi'))
-        ->where("id_propinsi_reg", $request->query('ID_Propinsi_reg'))
-        ->where("id_kualifikasi", $request->query('ID_Kualifikasi'))
-        ->first();
-        
         $approvalTrx                      = new ApprovalTransaction();
         $approvalTrx->id_asosiasi_profesi = $request->query('ID_Asosiasi_Profesi');
         $approvalTrx->id_propinsi_reg     = $request->query('ID_Propinsi_reg');
-        $approvalTrx->team_id             = $request->query('team');
         $approvalTrx->tipe_sertifikat     = "SKA";
         $approvalTrx->id_personal         = $request->query('ID_Personal');
         $approvalTrx->nama                = $request->query('Nama');
@@ -188,9 +184,7 @@ class ApprovalRegtaController extends Controller
         $approvalTrx->tgl_registrasi      = $request->query('Tgl_Registrasi');
         $approvalTrx->id_kualifikasi      = $request->query('ID_Kualifikasi');
         $approvalTrx->id_permohonan       = $request->query('id_permohonan');
-        $approvalTrx->dpp_adm_anggota     = 0;
-        $approvalTrx->dpp_kontribusi      = $teamKontribusi->kontribusi;
-        $approvalTrx->dpp_total           = $teamKontribusi->kontribusi;
+        $approvalTrx->status              = 0;
         $approvalTrx->created_by          = Auth::id();
         $approvalTrx->save();
     }
