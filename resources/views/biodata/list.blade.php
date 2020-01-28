@@ -171,7 +171,7 @@
                   <td>{{$pr->Lokasi}}</td>
                   <td>{{$pr->Jabatan}}</td>
                   <td>{{\Carbon\Carbon::parse($pr->Tgl_Mulai)->format("d F Y")}} - {{\Carbon\Carbon::parse($pr->Tgl_Selesai)->format("d F Y")}}</td>
-                  <td>{{number_format(preg_replace("/\D/","",$pr->Nilai), 0, ",", ".")}}</td>
+                  <td>{{number_format(($pr->Nilai && $pr->Nilai != "" ? preg_replace("/\D/","",$pr->Nilai): 0), 0, ",", ".")}}</td>
                   <td><a data-type="iframe" data-fancybox href={{$pr->file ? $pr->file["persyaratan_16"] : "#"}}>View</a></td>
                   {{-- <td>{{$pr->sync ? $pr->sync->updated_at : "-"}}</td> --}}
                   {{-- <td>{{$pr->sync ? $pr->sync->id : "-"}}</td> --}}
