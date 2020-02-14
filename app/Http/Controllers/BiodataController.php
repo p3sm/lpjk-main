@@ -89,36 +89,40 @@ class BiodataController extends Controller
         // dd($obj);
 
         try{
-          if($obj->response > 0){
-            $local = Personal::find($obj->result[0]->id_personal);
-            $obj->result[0]->file = null;
-  
-            if($local && $obj->response > 0){
-                $obj->result[0]->file = [
-                  "persyaratan_4" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_4,
-                  "persyaratan_5" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_5,
-                  "persyaratan_8" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_8,
-                  "persyaratan_11" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_11,
-                  "persyaratan_12" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_12,
-                ];
+          if($obj && $obj->response){
+            if($obj->response > 0){
+              $local = Personal::find($obj->result[0]->id_personal);
+              $obj->result[0]->file = null;
+    
+              if($local && $obj->response > 0){
+                  $obj->result[0]->file = [
+                    "persyaratan_4" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_4,
+                    "persyaratan_5" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_5,
+                    "persyaratan_8" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_8,
+                    "persyaratan_11" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_11,
+                    "persyaratan_12" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_12,
+                  ];
+              }
             }
+
+            $data['id_personal']   = $id_personal;
+            $data['response']      = $obj->response;
+            $data['results']       = $obj->response > 0 ? $obj->result : [];
+            $data['role']          = Auth::user()->role_id;
+            $data['pendidikan']    = $this->getPendidikan($id_personal);
+            $data['proyek']        = $this->getProyek($id_personal);
+            $data['organisasi']    = $this->getOrganisasi($id_personal);
+            $data['kursus']        = $this->getKursus($id_personal);
+            $data['klasifikasiTA'] = $this->getKlasifikasiTA($id_personal);
+            $data['klasifikasiTT'] = $this->getKlasifikasiTT($id_personal);
+
+            if($obj->response < 1)
+              $request->session()->flash('error', $obj->message);
+            else if(count($data['results']) < 1)
+              $request->session()->flash('error', 'Biodata tidak ditemukan');
+          } else {
+            $request->session()->flash('error', "Terjadi kesalahan saat mengambil data, silakan coba lagi");
           }
-
-          $data['id_personal']   = $id_personal;
-          $data['response']      = $obj->response;
-          $data['results']       = $obj->response > 0 ? $obj->result : [];
-          $data['role']          = Auth::user()->role_id;
-          $data['pendidikan']    = $this->getPendidikan($id_personal);
-          $data['proyek']        = $this->getProyek($id_personal);
-          $data['organisasi']    = $this->getOrganisasi($id_personal);
-          $data['kursus']        = $this->getKursus($id_personal);
-          $data['klasifikasiTA'] = $this->getKlasifikasiTA($id_personal);
-          $data['klasifikasiTT'] = $this->getKlasifikasiTT($id_personal);
-
-          if($obj->response < 1)
-            $request->session()->flash('error', $obj->message);
-          else if(count($data['results']) < 1)
-            $request->session()->flash('error', 'Biodata tidak ditemukan');
 
         } catch (Exception $err){
           $request->session()->flash('error', $err);

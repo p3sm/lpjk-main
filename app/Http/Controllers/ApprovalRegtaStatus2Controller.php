@@ -175,19 +175,27 @@ class ApprovalRegtaStatus2Controller extends Controller
     }
 
     public function ApproveTransaction($request){
-        $approvalTrx                      = new ApprovalTransaction();
-        $approvalTrx->id_asosiasi_profesi = $request->query('ID_Asosiasi_Profesi');
-        $approvalTrx->id_propinsi_reg     = $request->query('ID_Propinsi_reg');
-        $approvalTrx->tipe_sertifikat     = "SKA";
-        $approvalTrx->id_personal         = $request->query('ID_Personal');
-        $approvalTrx->nama                = $request->query('Nama');
-        $approvalTrx->id_sub_bidang       = $request->query('ID_Sub_Bidang');
-        $approvalTrx->id_unit_sertifikasi = $request->query('id_unit_sertifikasi');
-        $approvalTrx->tgl_registrasi      = $request->query('Tgl_Registrasi');
-        $approvalTrx->id_kualifikasi      = $request->query('ID_Kualifikasi');
-        $approvalTrx->id_permohonan       = $request->query('id_permohonan');
-        $approvalTrx->status              = 2;
-        $approvalTrx->created_by          = Auth::id();
-        $approvalTrx->save();
+        $find = ApprovalTransaction::where("id_personal", $request->query('ID_Personal'))
+                                    ->where("id_sub_bidang", $request->query('ID_Sub_Bidang'))
+                                    ->where("id_kualifikasi", $request->query('ID_Kualifikasi'))
+                                    ->where("status", 2)
+                                    ->first();
+
+        if(!$find){
+            $approvalTrx                      = new ApprovalTransaction();
+            $approvalTrx->id_asosiasi_profesi = $request->query('ID_Asosiasi_Profesi');
+            $approvalTrx->id_propinsi_reg     = $request->query('ID_Propinsi_reg');
+            $approvalTrx->tipe_sertifikat     = "SKA";
+            $approvalTrx->id_personal         = $request->query('ID_Personal');
+            $approvalTrx->nama                = $request->query('Nama');
+            $approvalTrx->id_sub_bidang       = $request->query('ID_Sub_Bidang');
+            $approvalTrx->id_unit_sertifikasi = $request->query('id_unit_sertifikasi');
+            $approvalTrx->tgl_registrasi      = $request->query('Tgl_Registrasi');
+            $approvalTrx->id_kualifikasi      = $request->query('ID_Kualifikasi');
+            $approvalTrx->id_permohonan       = $request->query('id_permohonan');
+            $approvalTrx->status              = 2;
+            $approvalTrx->created_by          = Auth::id();
+            $approvalTrx->save();
+        }
     }
 }
