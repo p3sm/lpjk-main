@@ -775,7 +775,7 @@ class BiodataController extends Controller
           "id_sub_bidang"       => $request->query('ID_Sub_Bidang'),
           "id_kualifikasi"      => $request->query('ID_Kualifikasi'),
           "id_asosiasi"         => $request->query('ID_Asosiasi_Profesi'),
-          "no_sk"               => $request->query('no_sk'),
+          "no_sk"               => $request->query('no_sk') == "" ? "-" : $request->query('no_sk'),
           "no_reg_asosiasi"     => $request->query('No_Reg_Asosiasi'),
           "id_unit_sertifikasi" => $request->query('id_unit_sertifikasi'),
           "id_permohonan"       => $request->query('id_permohonan'),
