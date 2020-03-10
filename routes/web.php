@@ -64,4 +64,8 @@ Route::group(['middleware' => 'auth'], function(){
 		]);
 	});
 	
+	Route::resources(['document' => 'DocumentController']);
+	
+	Route::resources(['pengajuan_naik_status' => 'PengajuanNaikStatusController']);
+	
 });
