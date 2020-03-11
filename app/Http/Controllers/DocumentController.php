@@ -22,7 +22,7 @@ class DocumentController extends Controller
         try {
             $data = explode(".", Crypt::decryptString($request->query('data')));
     
-            $data['regta'] = PersonalRegTA::where("ID_Personal", $data["0"])->where("Tgl_Registrasi", $data["1"])->get();
+            $data['regta'] = PersonalRegTA::where("diajukan", 1)->where("ID_Personal", $data["0"])->where("Tgl_Registrasi", $data["1"])->get();
         } catch (\Exception $e){
             return;
         }

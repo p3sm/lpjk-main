@@ -62,7 +62,7 @@
                     <td>{{$result->date}}</td>
                     <td>{{$result->created_at}}</td>
                     <td>{{$result->created_by}}</td>
-                    <td><a data-type="iframe" data-fancybox href={{"document?data=" . \Illuminate\Support\Facades\Crypt::encryptString($result->id_personal . "." . date('Y-m-d', strtotime($result->date)))}}>View</a></td>
+                    <td><a class="fancybox" href={{"document?data=" . \Illuminate\Support\Facades\Crypt::encryptString($result->id_personal . "." . date('Y-m-d', strtotime($result->date)))}}>View</a></td>
                     <td>
                       <a href="{{url("biodata/" . $result->id_personal)}}" class="btn btn-primary btn-xs">Cari</a>
                     </td>
@@ -83,3 +83,34 @@
     </section>
     <!-- /.content -->
 @endsection
+
+@push('script')
+<script>
+$(function(){
+  $(".fancybox").fancybox({
+    "iframe" : {
+		  "preload" : false
+	  },
+    'width': 600,
+    // 'height': 250,
+    // 'transitionIn': 'elastic', // this option is for v1.3.4
+    // 'transitionOut': 'elastic', // this option is for v1.3.4
+    // if using v2.x AND set class fancybox.iframe, you may not need this
+    'type': 'iframe',
+    'autoSize': false,
+    // if you want your iframe always will be 600x250 regardless the viewport size
+    // 'fitToView' : false  // use autoScale for v1.3.4
+  });
+});
+</script>
+@endpush
+
+<style>
+  .fancybox-content {
+    width: 900px!important;
+    padding: 20px!important;
+  }
+  .fancybox-iframe {
+    padding: 40px!important;
+  }
+</style>
