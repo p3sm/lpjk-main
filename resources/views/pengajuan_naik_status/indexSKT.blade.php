@@ -63,7 +63,7 @@
                     <td>{{$result->date}}</td>
                     <td>{{$result->created_at}}</td>
                     <td>{{$result->created_by}}</td>
-                    <td><a class="fancybox" href={{"/document?profesi=2&data=" . \Illuminate\Support\Facades\Crypt::encryptString($result->id_personal . "." . date('Y-m-d', strtotime($result->date)))}}>View</a></td>
+                    <td><a class="fancybox" href={{"/document?data=" . \Illuminate\Support\Facades\Crypt::encryptString("2." . $result->id  . "." . $result->id_personal . "." . date('Y-m-d', strtotime($result->date)))}}>View</a></td>
                     <td>
                       <a href="{{url("biodata/" . $result->id_personal)}}" class="btn btn-primary btn-xs">Cari</a>
                     </td>
