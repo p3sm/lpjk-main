@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\PengajuanNaikStatus;
+use App\PengajuanNaikStatusTT;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Carbon\Carbon;
@@ -11,16 +12,19 @@ use Illuminate\Support\Facades\Auth;
 
 class PengajuanNaikStatusController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    
+    public function ska()
     {
       $data["pengajuan"] = PengajuanNaikStatus::all();
 
-      return view('pengajuan_naik_status/index')->with($data);
+      return view('pengajuan_naik_status/indexSKA')->with($data);
+    }
+
+    public function skt()
+    {
+      $data["pengajuan"] = PengajuanNaikStatusTT::all();
+
+      return view('pengajuan_naik_status/indexSKT')->with($data);
     }
 
     /**

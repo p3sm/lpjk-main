@@ -89,13 +89,15 @@
         </li>
         @endif
 
-        {{-- <li class="treeview {{Request::is('pengajuan_naik_status*') ? 'active' : ''}}">
-          <a href=""><i class="fa fa-tasks"></i><span>Pengajuan Naik Status</span> <i class="fa fa-angle-left pull-right"></i></a>
+        @if(Helpers::checkPermission('verify'))
+        <li class="treeview {{Request::is('vva*') ? 'active' : ''}}">
+          <a href=""><i class="fa fa-tasks"></i><span>Kirim VVA</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
-            <li class="{{Request::is('pengajuan_naik_status_regta*') ? 'active' : ''}}"> <a href="{{ url('pengajuan_naik_status') }}"><span>Tenaga Ahli</span> </a> </li>
-            <li class="{{Request::is('pengajuan_naik_status_regtt*') ? 'active' : ''}}"> <a href="{{ url('pengajuan_naik_status') }}"><span>Tenaga Trampil</span> </a> </li>
+            <li class="{{Request::is('vva/ska*') ? 'active' : ''}}"> <a href="{{ url('vva/ska') }}"><span>Tenaga Ahli</span> </a> </li>
+            <li class="{{Request::is('vva/skt*') ? 'active' : ''}}"> <a href="{{ url('vva/skt') }}"><span>Tenaga Trampil</span> </a> </li>
           </ul>
-        </li> --}}
+        </li>
+        @endif
 
         @if(Helpers::checkPermission('status_0'))
         <li class="treeview {{Request::is('approval_0*') ? 'active' : ''}}">

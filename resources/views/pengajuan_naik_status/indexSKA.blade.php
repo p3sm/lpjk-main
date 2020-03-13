@@ -15,9 +15,10 @@
 </style>
 <!-- Content Header (Page header) -->
     <section class="content-header">
+      <h1>VVA</h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{url("pengajuan_naik_status")}}">Pengajuan Naik Status</a></li>
+        <li><a href="{{url("pengajuan_naik_status")}}">Kirim VVA SKA</a></li>
       </ol>
     </section>
 
@@ -41,7 +42,7 @@
 
           {{--  table data  --}}
           <div class="table-responsive" style="">
-            <h4>Pengajuan Naik Status</h4>
+            <h4>Kirim VVA SKA</h4>
             <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
               <thead>
                 <tr>
@@ -62,7 +63,7 @@
                     <td>{{$result->date}}</td>
                     <td>{{$result->created_at}}</td>
                     <td>{{$result->created_by}}</td>
-                    <td><a class="fancybox" href={{"document?data=" . \Illuminate\Support\Facades\Crypt::encryptString($result->id_personal . "." . date('Y-m-d', strtotime($result->date)))}}>View</a></td>
+                    <td><a class="fancybox" href={{"/document?data=" . \Illuminate\Support\Facades\Crypt::encryptString("1." . $result->id  . "." . $result->id_personal . "." . date('Y-m-d', strtotime($result->date)))}}>View</a></td>
                     <td>
                       <a href="{{url("biodata/" . $result->id_personal)}}" class="btn btn-primary btn-xs">Cari</a>
                     </td>
@@ -84,13 +85,14 @@
     <!-- /.content -->
 @endsection
 
+
 @push('script')
 <script>
 $(function(){
   $(".fancybox").fancybox({
-    "iframe" : {
-		  "preload" : false
-	  },
+    // "iframe" : {
+		//   "preload" : false
+	  // },
     'width': 600,
     // 'height': 250,
     // 'transitionIn': 'elastic', // this option is for v1.3.4

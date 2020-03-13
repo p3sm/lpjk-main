@@ -64,8 +64,11 @@ Route::group(['middleware' => 'auth'], function(){
 		]);
 	});
 	
-	Route::resources(['document' => 'DocumentController']);
-	
-	Route::resources(['pengajuan_naik_status' => 'PengajuanNaikStatusController']);
+	Route::group(['middleware' => 'authorize:verify'], function(){
+		Route::resources(['document' => 'DocumentController']);
+		
+		Route::get('vva/ska', 'PengajuanNaikStatusController@ska');
+		Route::get('vva/skt', 'PengajuanNaikStatusController@skt');
+	});
 	
 });

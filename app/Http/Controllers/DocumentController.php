@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\PersonalRegTA;
+use App\PersonalRegTT;
+use App\PengajuanNaikStatus;
+use App\PengajuanNaikStatusTT;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Carbon\Carbon;
@@ -20,14 +23,31 @@ class DocumentController extends Controller
     public function index(Request $request)
     {
         try {
-            $data = explode(".", Crypt::decryptString($request->query('data')));
-    
-            $data['regta'] = PersonalRegTA::where("diajukan", 1)->where("ID_Personal", $data["0"])->where("Tgl_Registrasi", $data["1"])->get();
+            $param = explode(".", Crypt::decryptString($request->query('data')));
+
+            if($param["0"] == 1){
+                $pengajuan = PengajuanNaikStatus::find($param["1"]);
+            } else {
+                $pengajuan = PengajuanNaikStatusTT::find($param["1"]);
+            }
+
+            $data["ttd_verifikator"] = $pengajuan->ttd_verifikator;
+            $data["ttd_database"] = $pengajuan->ttd_database;
+            
+            if($param["0"] == 1){
+                $data['regta'] = PersonalRegTA::where("diajukan", 1)->where("ID_Personal", $param["2"])->where("Tgl_Registrasi", $param["3"])->get();
+            } else {
+                $data['regta'] = PersonalRegTT::where("diajukan", 1)->where("ID_Personal", $param["2"])->where("Tgl_Registrasi", $param["3"])->get();
+            }
         } catch (\Exception $e){
             return;
         }
 
-        return view('document/index')->with($data);
+        if($param["0"] == 1){
+            return view('document/index')->with($data);
+        } else {
+            return view('document/indexSKT')->with($data);
+        }
     }
 
     /**

@@ -1,6 +1,6 @@
 <div class="doc">
   <img class="logo" src="{{ asset('image/logo_lpjk.jpg') }}" />
-  <h1>HASIL PEMERIKSAAN KELENGKAPAN DAN KEBENARAN DATA DOKUMEN PERMOHONAN SKA</h1>
+  <h1>HASIL PEMERIKSAAN KELENGKAPAN DAN KEBENARAN DATA DOKUMEN PERMOHONAN SKT</h1>
   <div class="clearfix"></div>
 
   <table style="margin-bottom: 40px">
@@ -205,7 +205,7 @@
 
 <div class="doc">
   <img class="logo" src="{{ asset('image/logo_lpjk.jpg') }}" />
-  <h1>Data Asosiasi Profesi Tenaga Ahli Konstruksi</h1>
+  <h1>Data Asosiasi Profesi Tenaga Terampil Konstruksi</h1>
   <div class="clearfix"></div>
 
   <table>
@@ -339,7 +339,7 @@
     </div>
     <div class="ttd float">
       <span class="top">Verifikator</span>
-      <img style="max-width: 121px;max-height: 130px;" src="{{asset('image/signature/verifikator/' . $ttd_verifikator)}}" />
+      <img style="max-width: 180px;max-height: 130px;" src="{{asset('image/signature/verifikator/' . $ttd_verifikator)}}" />
     </div>
     <div class="clearfix"></div>
   </div>
