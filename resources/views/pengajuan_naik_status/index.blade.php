@@ -41,7 +41,7 @@
 
           {{--  table data  --}}
           <div class="table-responsive" style="">
-            <h4>Biodata</h4>
+            <h4>Pengajuan Naik Status</h4>
             <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
               <thead>
                 <tr>

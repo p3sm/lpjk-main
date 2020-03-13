@@ -89,6 +89,14 @@
         </li>
         @endif
 
+        {{-- <li class="treeview {{Request::is('pengajuan_naik_status*') ? 'active' : ''}}">
+          <a href=""><i class="fa fa-tasks"></i><span>Pengajuan Naik Status</span> <i class="fa fa-angle-left pull-right"></i></a>
+          <ul class="treeview-menu">
+            <li class="{{Request::is('pengajuan_naik_status_regta*') ? 'active' : ''}}"> <a href="{{ url('pengajuan_naik_status') }}"><span>Tenaga Ahli</span> </a> </li>
+            <li class="{{Request::is('pengajuan_naik_status_regtt*') ? 'active' : ''}}"> <a href="{{ url('pengajuan_naik_status') }}"><span>Tenaga Trampil</span> </a> </li>
+          </ul>
+        </li> --}}
+
         @if(Helpers::checkPermission('status_0'))
         <li class="treeview {{Request::is('approval_0*') ? 'active' : ''}}">
           <a href=""><i class="fa fa-tasks"></i><span>Approval Status 0</span> <i class="fa fa-angle-left pull-right"></i></a>
