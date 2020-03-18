@@ -91,7 +91,7 @@
 
         @if(Helpers::checkPermission('verify'))
         <li class="treeview {{Request::is('vva*') ? 'active' : ''}}">
-          <a href=""><i class="fa fa-tasks"></i><span>Kirim VVA</span> <i class="fa fa-angle-left pull-right"></i></a>
+          <a href=""><i class="fa fa-tasks"></i><span>Proses VVA</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
             <li class="{{Request::is('vva/ska*') ? 'active' : ''}}"> <a href="{{ url('vva/ska') }}"><span>Tenaga Ahli</span> </a> </li>
             <li class="{{Request::is('vva/skt*') ? 'active' : ''}}"> <a href="{{ url('vva/skt') }}"><span>Tenaga Trampil</span> </a> </li>
