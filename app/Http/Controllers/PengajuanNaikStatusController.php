@@ -13,18 +13,28 @@ use Illuminate\Support\Facades\Auth;
 class PengajuanNaikStatusController extends Controller
 {
     
-    public function ska()
+    public function ska(Request $request)
     {
-      $data["pengajuan"] = PengajuanNaikStatus::orderBy("date", "DESC")->orderBy("id_personal", "ASC")->orderBy("id", "DESC")->get();
+        $data['from'] = $request->from ? Carbon::createFromFormat("d/m/Y", $request->from) : Carbon::now()->subDays(1);
+        $data['to'] = $request->to ? Carbon::createFromFormat("d/m/Y", $request->to) : Carbon::now();
 
-      return view('pengajuan_naik_status/indexSKA')->with($data);
+        $data["pengajuan"] = PengajuanNaikStatus::whereDate("created_at", ">=", $data['from']->format('Y-m-d'))
+        ->whereDate("created_at", "<=", $data['to']->format('Y-m-d'))
+        ->orderBy("date", "DESC")->orderBy("id_personal", "ASC")->orderBy("id", "DESC")->get();
+
+        return view('pengajuan_naik_status/indexSKA')->with($data);
     }
 
-    public function skt()
+    public function skt(Request $request)
     {
-      $data["pengajuan"] = PengajuanNaikStatusTT::orderBy("date", "DESC")->orderBy("id_personal", "ASC")->orderBy("id", "DESC")->get();
+        $data['from'] = $request->from ? Carbon::createFromFormat("d/m/Y", $request->from) : Carbon::now()->subDays(1);
+        $data['to'] = $request->to ? Carbon::createFromFormat("d/m/Y", $request->to) : Carbon::now();
 
-      return view('pengajuan_naik_status/indexSKT')->with($data);
+        $data["pengajuan"] = PengajuanNaikStatusTT::whereDate("created_at", ">=", $data['from']->format('Y-m-d'))
+        ->whereDate("created_at", "<=", $data['to']->format('Y-m-d'))
+        ->orderBy("date", "DESC")->orderBy("id_personal", "ASC")->orderBy("id", "DESC")->get();
+
+        return view('pengajuan_naik_status/indexSKT')->with($data);
     }
 
     /**

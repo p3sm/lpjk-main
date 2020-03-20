@@ -28,6 +28,16 @@
       <!-- Default box -->
       <div class="box">
         <div class="box-body">
+          <form method="get" style="margin-bottom: 20px" action="" class="form-inline float-right">
+            <label class="" for="inlineFormCustomSelectPref">filter: </label>
+            <div class="input-group input-daterange">
+              <input type="text" name="from" class="form-control input-sm" value="{{$from->format("d/m/Y")}}">
+              <div class="input-group-addon">to</div>
+              <input type="text" name="to" class="form-control input-sm" value="{{$to->format("d/m/Y")}}">
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm my-1">Apply</button>
+          </form>
+
           @if(session()->get('success'))
           <div class="alert alert-success alert-block">
             <button type="button" class="close" data-dismiss="alert">×</button><strong>{{ session()->get('success') }}</strong>
@@ -98,6 +108,7 @@
 @push('script')
 <script>
 $(function(){
+  $('.input-daterange').datepicker({format: 'dd/mm/yyyy'});
   $(".fancybox").fancybox({
     // "iframe" : {
 		//   "preload" : false
