@@ -132,6 +132,12 @@
         </li> --}}
         @endif
 
+        @if(Helpers::checkPermission('rekap'))
+        <li class="treeview {{Request::is('rekap*') ? 'active' : ''}}">
+          <a href="{{ url('rekaprpl') }}"><i class="fa fa-tasks"></i><span>Cetak Rekap RPL</span></a>
+        </li>
+        @endif
+
         @if(Helpers::checkPermission('user'))
         <li class="treeview {{Request::is('user*') ? 'active' : ''}}">
           <a href="#">

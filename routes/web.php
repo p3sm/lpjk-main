@@ -71,4 +71,8 @@ Route::group(['middleware' => 'auth'], function(){
 		Route::get('vva/skt', 'PengajuanNaikStatusController@skt');
 	});
 	
+	Route::group(['middleware' => 'authorize:rekap'], function(){
+		Route::get('rekaprpl', 'RekapRPLController@index');
+	});
+	
 });

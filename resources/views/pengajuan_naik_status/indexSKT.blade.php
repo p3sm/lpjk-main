@@ -18,7 +18,7 @@
       <h1>VVA</h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{url("pengajuan_naik_status")}}">Kirim VVA SKT</a></li>
+        <li><a href="{{url("pengajuan_naik_status")}}">Proses VVA SKT</a></li>
       </ol>
     </section>
 
@@ -47,10 +47,15 @@
               <thead>
                 <tr>
                   <th>No.</th>
-                  <th>ID Personal</th>
+                  <th>NIK</th>
+                  <th>Nama</th>
+                  <th>Klasifikasi</th>
+                  <th>Kualifikasi</th>
+                  <th>Asosiasi</th>
+                  <th>UStk</th>
                   <th>Tanggal Permohonan</th>
                   <th>Tanggal Pengajuan</th>
-                  <th>Di Request oleh</th>
+                  <th>Di Ajukan oleh</th>
                   <th>Dokumen</th>
                   <th>Cari Pemohon</th>
                 </tr>
@@ -60,10 +65,15 @@
                   <tr>
                     <td>{{$k + 1}}</td>
                     <td>{{$result->id_personal}}</td>
+                    <td>{{$result->nama}}</td>
+                    <td>{{$result->sub_bidang}}</td>
+                    <td>{{$result->kualifikasi}}</td>
+                    <td>{{$result->asosiasi}}</td>
+                    <td>{{$result->ustk}}</td>
                     <td>{{$result->date}}</td>
                     <td>{{$result->created_at}}</td>
                     <td>{{$result->created_by}}</td>
-                    <td><a class="fancybox" href={{"/document?data=" . \Illuminate\Support\Facades\Crypt::encryptString("2." . $result->id  . "." . $result->id_personal . "." . date('Y-m-d', strtotime($result->date)))}}>View</a></td>
+                    <td><a class="fancybox" href={{"/document?data=" . \Illuminate\Support\Facades\Crypt::encryptString("2." . $result->id  . "." . $result->id_personal . "." . $result->asosiasi . "." . date('Y-m-d', strtotime($result->date)))}}>View</a></td>
                     <td>
                       <a href="{{url("biodata/" . $result->id_personal)}}" class="btn btn-primary btn-xs">Cari</a>
                     </td>

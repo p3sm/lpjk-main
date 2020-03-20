@@ -15,14 +15,14 @@ class PengajuanNaikStatusController extends Controller
     
     public function ska()
     {
-      $data["pengajuan"] = PengajuanNaikStatus::all();
+      $data["pengajuan"] = PengajuanNaikStatus::orderBy("date", "DESC")->orderBy("id_personal", "ASC")->orderBy("id", "DESC")->get();
 
       return view('pengajuan_naik_status/indexSKA')->with($data);
     }
 
     public function skt()
     {
-      $data["pengajuan"] = PengajuanNaikStatusTT::all();
+      $data["pengajuan"] = PengajuanNaikStatusTT::orderBy("date", "DESC")->orderBy("id_personal", "ASC")->orderBy("id", "DESC")->get();
 
       return view('pengajuan_naik_status/indexSKT')->with($data);
     }

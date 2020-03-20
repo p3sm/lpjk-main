@@ -2,52 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\PersonalRegTA;
-use App\PersonalRegTT;
-use App\PengajuanNaikStatus;
-use App\PengajuanNaikStatusTT;
+use App\ApprovalTransaction;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
 
-class DocumentController extends Controller
+class RekapRPLController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index(Request $request)
     {
-        try {
-            $param = explode(".", Crypt::decryptString($request->query('data')));
+      $data['from'] = $request->from ? Carbon::createFromFormat("d/m/Y", $request->from) : Carbon::now()->subDays(1);
+      $data['to'] = $request->to ? Carbon::createFromFormat("d/m/Y", $request->to) : Carbon::now();
 
-            if($param["0"] == 1){
-                $pengajuan = PengajuanNaikStatus::find($param["1"]);
-            } else {
-                $pengajuan = PengajuanNaikStatusTT::find($param["1"]);
-            }
+      $data["record"] = ApprovalTransaction::whereDate("created_at", ">=", $data['from']->format('Y-m-d'))
+      ->whereDate("created_at", "<=", $data['to']->format('Y-m-d'))
+      ->get();
 
-            $data["ttd_verifikator"] = $pengajuan->ttd_verifikator;
-            $data["ttd_database"] = $pengajuan->ttd_database;
-            
-            if($param["0"] == 1){
-                $data['regta'] = PersonalRegTA::where("diajukan", 1)->where("ID_Personal", $param["2"])->where("ID_Asosiasi_Profesi", $param["3"])->where("Tgl_Registrasi", $param["4"])->get();
-            } else {
-                $data['regta'] = PersonalRegTT::where("diajukan", 1)->where("ID_Personal", $param["2"])->where("ID_Asosiasi_Profesi", $param["3"])->where("Tgl_Registrasi", $param["4"])->get();
-            }
-        } catch (\Exception $e){
-            return;
-        }
-
-        if($param["0"] == 1){
-            return view('document/index')->with($data);
-        } else {
-            return view('document/indexSKT')->with($data);
-        }
+      return view('rekap_rpl/index')->with($data);
     }
 
     /**

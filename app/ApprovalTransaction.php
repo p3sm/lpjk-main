@@ -22,6 +22,6 @@ class ApprovalTransaction extends Model
     
   public function kualifikasi()
   {
-    return $this->belongsTo('App\SikiKualifikasi', 'id_kualifikasi');
+    return $this->belongsTo('App\Kualifikasi', 'id_kualifikasi');
   }
 }

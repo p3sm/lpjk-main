@@ -15,10 +15,10 @@
 </style>
 <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>VVA</h1>
+      <h1>REKAP RPL</h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{url("pengajuan_naik_status")}}">Proses VVA SKA</a></li>
+        <li><a href="{{url("pengajuan_naik_status")}}">Rekap RPL</a></li>
       </ol>
     </section>
 
@@ -28,6 +28,16 @@
       <!-- Default box -->
       <div class="box">
         <div class="box-body">
+          <form method="get" style="margin-bottom: 20px" action="" class="form-inline float-right">
+            <label class="" for="inlineFormCustomSelectPref">filter: </label>
+            <div class="input-group input-daterange">
+              <input type="text" name="from" class="form-control input-sm" value="{{$from->format("d/m/Y")}}">
+              <div class="input-group-addon">to</div>
+              <input type="text" name="to" class="form-control input-sm" value="{{$to->format("d/m/Y")}}">
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm my-1">Apply</button>
+          </form>
+
           @if(session()->get('success'))
           <div class="alert alert-success alert-block">
             <button type="button" class="close" data-dismiss="alert">×</button><strong>{{ session()->get('success') }}</strong>
@@ -42,41 +52,39 @@
 
           {{--  table data  --}}
           <div class="table-responsive" style="">
-            <h4>Kirim VVA SKA</h4>
-            <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <h4>Cetak Rekap RPL</h4>
+            <table id="data-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
               <thead>
                 <tr>
                   <th>No.</th>
                   <th>NIK</th>
                   <th>Nama</th>
+                  <th>Sertifikat</th>
                   <th>Klasifikasi</th>
                   <th>Kualifikasi</th>
                   <th>Asosiasi</th>
                   <th>UStk</th>
                   <th>Tanggal Permohonan</th>
-                  <th>Tanggal Pengajuan</th>
-                  <th>Di Ajukan oleh</th>
+                  <th>Tanggal Naik Status</th>
+                  <th>Oleh</th>
                   <th>Dokumen</th>
-                  <th>Cari Pemohon</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach($pengajuan as $k => $result)
+                @foreach($record as $k => $result)
                   <tr>
                     <td>{{$k + 1}}</td>
                     <td>{{$result->id_personal}}</td>
                     <td>{{$result->nama}}</td>
-                    <td>{{$result->sub_bidang}}</td>
-                    <td>{{$result->kualifikasi}}</td>
-                    <td>{{$result->asosiasi}}</td>
-                    <td>{{$result->ustk}}</td>
-                    <td>{{$result->date}}</td>
+                    <td>{{$result->tipe_sertifikat}}</td>
+                    <td>{{$result->id_sub_bidang}}</td>
+                    <td>{{$result->tipe_sertifikat == "SKA" ? $result->kualifikasi->deskripsi_ahli : $result->kualifikasi->deskripsi_trampil}}</td>
+                    <td>{{$result->id_asosiasi_profesi}}</td>
+                    <td>{{$result->id_unit_sertifikasi}}</td>
+                    <td>{{$result->tgl_registrasi}}</td>
                     <td>{{$result->created_at}}</td>
                     <td>{{$result->created_by}}</td>
                     <td><a class="fancybox" href={{"/document?data=" . \Illuminate\Support\Facades\Crypt::encryptString("1." . $result->id  . "." . $result->id_personal  . "." . $result->asosiasi . "." . date('Y-m-d', strtotime($result->date)))}}>View</a></td>
-                    <td>
-                      <a href="{{url("biodata/" . $result->id_personal)}}" class="btn btn-primary btn-xs">Cari</a>
-                    </td>
                   </tr>
                 @endforeach
               </tbody>
@@ -99,6 +107,8 @@
 @push('script')
 <script>
 $(function(){
+  $('.input-daterange').datepicker({format: 'dd/mm/yyyy'});
+  $('#data-table').DataTable();
   $(".fancybox").fancybox({
     // "iframe" : {
 		//   "preload" : false
