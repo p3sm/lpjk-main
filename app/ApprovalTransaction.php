@@ -15,9 +15,29 @@ class ApprovalTransaction extends Model
     return $this->belongsTo('App\Team', 'team_id');
   }
     
+  public function personal()
+  {
+    return $this->belongsTo('App\Personal', 'id_personal');
+  }
+    
+  public function asosiasi()
+  {
+    return $this->belongsTo('App\Asosiasi', 'id_asosiasi_profesi');
+  }
+    
   public function provinsi()
   {
-    return $this->belongsTo('App\SikiPropinsi', 'id_propinsi_reg');
+    return $this->belongsTo('App\Provinsi', 'id_propinsi_reg');
+  }
+    
+  public function ustk()
+  {
+    return $this->belongsTo('App\Ustk', 'id_unit_sertifikasi');
+  }
+    
+  public function klasifikasi()
+  {
+    return $this->belongsTo('App\SubKlasifikasi', 'id_sub_bidang');
   }
     
   public function kualifikasi()

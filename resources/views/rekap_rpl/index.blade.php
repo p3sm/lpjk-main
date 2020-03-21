@@ -35,7 +35,15 @@
               <div class="input-group-addon">to</div>
               <input type="text" name="to" class="form-control input-sm" value="{{$to->format("d/m/Y")}}">
             </div>
+            <label class="" for="">Asosiasi: </label>
+            <select name="as" class="form-control input-sm">
+              <option value="">-- Pilih Asosiasi --</option>
+              @foreach ($asosiasi as $data)
+                <option value="{{$data->id_asosiasi}}" {{$as == $data->id_asosiasi ? "selected" : ""}}>{{$data->id_asosiasi}} - {{$data->nama}}</option>
+              @endforeach
+            </select>
             <button type="submit" class="btn btn-primary btn-sm my-1">Apply</button>
+            <a class="btn btn-success btn-sm fancybox" href={{"/rekap?data=" . \Illuminate\Support\Facades\Crypt::encryptString($from->format("d/m/Y")  . "." . $to->format("d/m/Y") . "." . $as)}}>CETAK</a>
           </form>
 
           @if(session()->get('success'))
@@ -63,11 +71,10 @@
                   <th>Klasifikasi</th>
                   <th>Kualifikasi</th>
                   <th>Asosiasi</th>
-                  <th>UStk</th>
+                  <th>USTK</th>
                   <th>Tanggal Permohonan</th>
                   <th>Tanggal Naik Status</th>
                   <th>Oleh</th>
-                  <th>Dokumen</th>
                 </tr>
               </thead>
               <tbody>
@@ -84,7 +91,6 @@
                     <td>{{$result->tgl_registrasi}}</td>
                     <td>{{$result->created_at}}</td>
                     <td>{{$result->created_by}}</td>
-                    <td><a class="fancybox" href={{"/document?data=" . \Illuminate\Support\Facades\Crypt::encryptString("1." . $result->id  . "." . $result->id_personal  . "." . $result->asosiasi . "." . date('Y-m-d', strtotime($result->date)))}}>View</a></td>
                   </tr>
                 @endforeach
               </tbody>
@@ -113,7 +119,7 @@ $(function(){
     // "iframe" : {
 		//   "preload" : false
 	  // },
-    'width': 600,
+    'width': 1200,
     // 'height': 250,
     // 'transitionIn': 'elastic', // this option is for v1.3.4
     // 'transitionOut': 'elastic', // this option is for v1.3.4
@@ -129,7 +135,7 @@ $(function(){
 
 <style>
   .fancybox-content {
-    width: 900px!important;
+    width: 1200px!important;
     padding: 20px!important;
   }
   .fancybox-iframe {

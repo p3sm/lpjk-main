@@ -65,7 +65,8 @@ Route::group(['middleware' => 'auth'], function(){
 	});
 	
 	Route::group(['middleware' => 'authorize:verify'], function(){
-		Route::resources(['document' => 'DocumentController']);
+		Route::get('document', 'DocumentController@index');
+		Route::get('rekap', 'DocumentController@rekap');
 		
 		Route::get('vva/ska', 'PengajuanNaikStatusController@ska');
 		Route::get('vva/skt', 'PengajuanNaikStatusController@skt');

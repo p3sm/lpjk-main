@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ApprovalTransaction;
+use App\Asosiasi;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Carbon\Carbon;
@@ -14,12 +15,18 @@ class RekapRPLController extends Controller
     
     public function index(Request $request)
     {
+      $data['asosiasi'] = Asosiasi::orderBy("id_asosiasi", "asc")->get();
       $data['from'] = $request->from ? Carbon::createFromFormat("d/m/Y", $request->from) : Carbon::now()->subDays(1);
       $data['to'] = $request->to ? Carbon::createFromFormat("d/m/Y", $request->to) : Carbon::now();
+      $data['as'] = $request->as;
 
-      $data["record"] = ApprovalTransaction::whereDate("created_at", ">=", $data['from']->format('Y-m-d'))
-      ->whereDate("created_at", "<=", $data['to']->format('Y-m-d'))
-      ->get();
+      $record = ApprovalTransaction::whereDate("created_at", ">=", $data['from']->format('Y-m-d'))
+      ->whereDate("created_at", "<=", $data['to']->format('Y-m-d'));
+
+      if($request->as)
+        $record->where("id_asosiasi_profesi", $request->as);
+      
+      $data["record"] = $record->get();
 
       return view('rekap_rpl/index')->with($data);
     }

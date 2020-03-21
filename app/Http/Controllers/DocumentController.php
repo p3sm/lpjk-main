@@ -6,6 +6,7 @@ use App\PersonalRegTA;
 use App\PersonalRegTT;
 use App\PengajuanNaikStatus;
 use App\PengajuanNaikStatusTT;
+use App\ApprovalTransaction;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Carbon\Carbon;
@@ -48,6 +49,29 @@ class DocumentController extends Controller
         } else {
             return view('document/indexSKT')->with($data);
         }
+    }
+
+    public function rekap(Request $request)
+    {
+        try {
+            $param = explode(".", Crypt::decryptString($request->query('data')));
+            $from = Carbon::createFromFormat("d/m/Y", $param[0]);
+            $to = Carbon::createFromFormat("d/m/Y", $param[1]);
+            $as = $param[2];
+
+            $record = ApprovalTransaction::whereDate("created_at", ">=", $from->format('Y-m-d'))
+            ->whereDate("created_at", "<=", $to->format('Y-m-d'));
+      
+            if($as)
+              $record->where("id_asosiasi_profesi", $as);
+
+            $data["transaction"] = $record->get();
+            
+        } catch (\Exception $e){
+            return;
+        }
+
+        return view('rekap_rpl/dokumen')->with($data);
     }
 
     /**
