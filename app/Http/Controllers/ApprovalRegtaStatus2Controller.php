@@ -13,19 +13,28 @@ use Illuminate\Support\Facades\Auth;
 
 class ApprovalRegtaStatus2Controller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
+    {
+        // if(Auth::user()->asosiasi){
+        //     return redirect('/approval_regta/' . Auth::user()->asosiasi->asosiasi_id);
+        // }
+        
+    	return view('approval/regta_2/index');
+    }
+
+    public function search(Request $request)
+    {
+        return redirect("approval_2_regta/" . $request->id_personal);
+    }
+    
+    public function list(Request $request)
     {
         $key = ApiKey::first();
 
         $postData = [
             "status_99" => 1,
-            "id_status" => 1
-            // "id_asosiasi" => $asosiasi_id
+            "id_status" => 1,
+            "ID_Personal" => $request->nik
           ];
 
         $curl = curl_init();
@@ -55,71 +64,6 @@ class ApprovalRegtaStatus2Controller extends Controller
         }
 
         return view('approval/regta_2/list')->with($data);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($asosiasi_id)
-    {
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     public function approve(Request $request, $id)

@@ -17,7 +17,7 @@
     <section class="content-header">
       <h1>
         {{-- <a href="{{url("siki_regta")}}" class="btn btn-danger btn-sm"><i class="fa fa-arrow-left"></i> kembali</a>  --}}
-        Pilih Asosiasi
+        Approval Status 0 Tenaga Ahli
         {{--  <small>it all starts here</small>  --}}
       </h1>
       <ol class="breadcrumb">
@@ -32,17 +32,34 @@
 
       <!-- Default box -->
       <div class="box">
-        <div class="box-body">
-          <a href="{{url('approval_0_regta/142')}}" class="btn btn-warning btn-lg">
-            ASTEKINDO
-          </a>
-          <a href="{{url('approval_0_regta/148')}}" class="btn btn-warning btn-lg">
-            GATAKI
-          </a>
-        </div>
-        <!-- /.box-body -->
-        <div class="box-footer"></div>
-        <!-- /.box-footer-->
+        <form action="{{url("approval_0_regta")}}" method="post">
+          @csrf
+          <div class="box-body">
+            @if(session()->get('success'))
+            <div class="alert alert-success alert-block">
+              <button type="button" class="close" data-dismiss="alert">×</button>   
+                    <strong>{{ session()->get('success') }}</strong>
+            </div>
+            @endif
+  
+            @if(session()->get('error'))
+            <div class="alert alert-danger alert-block">
+              <button type="button" class="close" data-dismiss="alert">×</button>   
+                    <strong>{{ session()->get('error') }}</strong>
+            </div>
+            @endif
+            
+            <div class="form-group">
+              <label for="id_personal">ID Personal</label>
+              <input type="text" class="form-control" name="id_personal" id="id_personal" placeholder="Enter ID Personal" required>
+            </div>
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer">
+            <button type="submit" name="submit" class="btn btn-primary">Cari</button>
+          </div>
+          <!-- /.box-footer-->
+        </form>
       </div>
       <!-- /.box -->
 

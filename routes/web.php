@@ -12,6 +12,8 @@
 */
 
 Route::auth();
+Route::get('document', 'DocumentController@index');
+Route::get('rekap', 'DocumentController@rekap');
 // Route::group(['middleware' => 'authorization:working_schedule'], function(){
 
 Route::group(['middleware' => 'auth'], function(){
@@ -20,28 +22,46 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::group(['middleware' => 'authorize:status_0'], function(){
 		Route::get('approval_report', 'ApprovalController@report');
 
+		Route::get('approval_0_regta', 'ApprovalRegtaController@index');
+		Route::post('approval_0_regta', 'ApprovalRegtaController@search');
+		Route::get('approval_0_regta/{nik}', 'ApprovalRegtaController@list');
 		Route::get('approval_0_regta/{id}/approve', 'ApprovalRegtaController@approve');
-		Route::resources(['approval_0_regta' => 'ApprovalRegtaController']);
+		// Route::resources(['approval_0_regta' => 'ApprovalRegtaController']);
 
+		Route::get('approval_0_regtt', 'ApprovalRegttController@index');
+		Route::post('approval_0_regtt', 'ApprovalRegttController@search');
+		Route::get('approval_0_regtt/{nik}', 'ApprovalRegttController@list');
 		Route::get('approval_0_regtt/{id}/approve', 'ApprovalRegttController@approve');
-		Route::resources(['approval_0_regtt' => 'ApprovalRegttController']);
+		// Route::resources(['approval_0_regtt' => 'ApprovalRegttController']);
 	});
 
 	Route::group(['middleware' => 'authorize:status_1'], function(){
+		Route::get('approval_1_regta', 'ApprovalRegtaStatus1Controller@index');
+		Route::post('approval_1_regta', 'ApprovalRegtaStatus1Controller@search');
+		Route::get('approval_1_regta/{nik}', 'ApprovalRegtaStatus1Controller@list');
 		Route::get('approval_1_regta/{id}/approve', 'ApprovalRegtaStatus1Controller@approve');
-		Route::resources(['approval_1_regta' => 'ApprovalRegtaStatus1Controller']);
+		// Route::resources(['approval_1_regta' => 'ApprovalRegtaStatus1Controller']);
 
+		Route::get('approval_1_regtt', 'ApprovalRegttStatus1Controller@index');
+		Route::post('approval_1_regtt', 'ApprovalRegttStatus1Controller@search');
+		Route::get('approval_1_regtt/{nik}', 'ApprovalRegttStatus1Controller@list');
 		Route::get('approval_1_regtt/{id}/approve', 'ApprovalRegttStatus1Controller@approve');
-		Route::resources(['approval_1_regtt' => 'ApprovalRegttStatus1Controller']);
+		// Route::resources(['approval_1_regtt' => 'ApprovalRegttStatus1Controller']);
 	});
 	
 	Route::group(['middleware' => 'authorize:status_2'], function(){
 
+		Route::get('approval_2_regta', 'ApprovalRegtaStatus2Controller@index');
+		Route::post('approval_2_regta', 'ApprovalRegtaStatus2Controller@search');
+		Route::get('approval_2_regta/{nik}', 'ApprovalRegtaStatus2Controller@list');
 		Route::get('approval_2_regta/{id}/approve', 'ApprovalRegtaStatus2Controller@approve');
-		Route::resources(['approval_2_regta' => 'ApprovalRegtaStatus2Controller']);
+		// Route::resources(['approval_2_regta' => 'ApprovalRegtaStatus2Controller']);
 
+		Route::get('approval_2_regtt', 'ApprovalRegttStatus2Controller@index');
+		Route::post('approval_2_regtt', 'ApprovalRegttStatus2Controller@search');
+		Route::get('approval_2_regtt/{nik}', 'ApprovalRegttStatus2Controller@list');
 		Route::get('approval_2_regtt/{id}/approve', 'ApprovalRegttStatus2Controller@approve');
-		Route::resources(['approval_2_regtt' => 'ApprovalRegttStatus2Controller']);
+		// Route::resources(['approval_2_regtt' => 'ApprovalRegttStatus2Controller']);
 	});
 
 	Route::group(['middleware' => 'authorize:data_personal'], function(){
@@ -65,8 +85,8 @@ Route::group(['middleware' => 'auth'], function(){
 	});
 	
 	Route::group(['middleware' => 'authorize:verify'], function(){
-		Route::get('document', 'DocumentController@index');
-		Route::get('rekap', 'DocumentController@rekap');
+		// Route::get('document', 'DocumentController@index');
+		// Route::get('rekap', 'DocumentController@rekap');
 		
 		Route::get('vva/ska', 'PengajuanNaikStatusController@ska');
 		Route::get('vva/skt', 'PengajuanNaikStatusController@skt');
@@ -75,5 +95,7 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::group(['middleware' => 'authorize:rekap'], function(){
 		Route::get('rekaprpl', 'RekapRPLController@index');
 	});
+	
+	Route::get('pdf', 'PDFController@index');
 	
 });

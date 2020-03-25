@@ -16,7 +16,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('AdminLTE-2.3.11/dist/css/AdminLTE.min.css') }}">
   <!-- iCheck -->
-  <link rel="stylesheet" href="../../plugins/iCheck/square/blue.css">
+  {{-- <link rel="stylesheet" href="../../plugins/iCheck/square/blue.css"> --}}
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -78,8 +78,8 @@
 <!-- Bootstrap 3.3.6 -->
 <script src="{{ asset('AdminLTE-2.3.11/bootstrap/js/bootstrap.min.js')}}"></script>
 <!-- iCheck -->
-<script src="../../plugins/iCheck/icheck.min.js"></script>
-<script>
+{{-- <script src="../../plugins/iCheck/icheck.min.js"></script> --}}
+{{-- <script>
   $(function () {
     $('input').iCheck({
       checkboxClass: 'icheckbox_square-blue',
@@ -87,6 +87,6 @@
       increaseArea: '20%' /* optional */
     });
   });
-</script>
+</script> --}}
 </body>
 </html>

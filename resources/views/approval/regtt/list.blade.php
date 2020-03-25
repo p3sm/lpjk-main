@@ -16,13 +16,13 @@
 <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <a href="{{url("approval_regtt")}}" class="btn btn-danger btn-sm"><i class="fa fa-arrow-left"></i> kembali</a> 
+        <a href="{{url("approval_0_regtt")}}" class="btn btn-danger btn-sm"><i class="fa fa-arrow-left"></i> kembali</a> 
         {{-- Data Registrasi Tenaga Ahli - Tahap {{count($regtas) > 0 ? $regtas[0]->tahap1 : "-"}} --}}
         {{--  <small>it all starts here</small>  --}}
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{url("approval_regtt")}}">Approval Tenaga Trampil</a></li>
+        <li><a href="{{url("approval_0_regtt")}}">Approval Tenaga Trampil</a></li>
         {{-- <li class="active"><a href="#">{{count($regtas) > 0 ? $regtas[0]->tahap1 : "-"}}</a></li> --}}
       </ol>
     </section>

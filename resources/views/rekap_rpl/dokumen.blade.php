@@ -1,3 +1,5 @@
+@php
+/* 
 <div class="doc">
   <h1>Serah Terima Berkas untuk Permohonan Registrasi</h1>
   <div class="nobreak">
@@ -79,6 +81,9 @@
   </div>
   <div class="clearfix"></div>
 </div>
+*/
+    
+@endphp
 
 <div class="doc">
   <h1>Daftar Registrasi Tenaga Kerja Konstruksi</h1>
@@ -135,7 +140,7 @@
 </div>
 
 <div class="doc">
-  <h1>Daftar Tenaga {{$transaction[0]->tipe_sertifikat == "SKA" ? "Ahli" : "Trampil"}} Konstruksi</h1>
+  <h1>Daftar Tenaga Ahli / Trampil Konstruksi</h1>
   <div class="nobreak">
     <table class="rowdata" cellpadding="0" cellspacing="0">
       <tr>

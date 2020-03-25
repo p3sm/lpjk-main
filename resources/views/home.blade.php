@@ -12,7 +12,7 @@
 	<section class="content">
 		<div class="row">
 			<!-- Left col -->
-			<div class="col-md-8">
+			{{-- <div class="col-md-8">
 			  <div class="box box-success">
 			    <div class="box-header with-border">
 			      <h3 class="box-title">Pemohon Terbaru</h3>
@@ -53,7 +53,7 @@
 			    </div>
 			    <!-- /.box-footer -->
 			  </div>
-			</div>
+			</div> --}}
 			<!-- /.col -->
 		</div>
 	</section>
