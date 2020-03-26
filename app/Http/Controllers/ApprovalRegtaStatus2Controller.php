@@ -55,7 +55,7 @@ class ApprovalRegtaStatus2Controller extends Controller
         $obj = json_decode($response);
         // dd($obj);
 
-        if($obj && $obj->response){
+        if($obj && $obj->response != null){
             $data['response'] = $obj->response;
             $data['results'] = $obj->response > 0 ? $obj->result : [];
             $data['role'] = Auth::user()->role_id;
