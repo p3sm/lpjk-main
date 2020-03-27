@@ -58,7 +58,7 @@
                           <th>Sub Bidang</th>
                           <th>Asosiasi</th>
                           <th>Kualifikasi</th>
-                          <th>Tgl Registrasi</th>
+                          <th>Tgl Permohonan</th>
                           <th>Provinsi</th>
                           <th>Unit Sertifikasi</th>
                           <th>Action</th>

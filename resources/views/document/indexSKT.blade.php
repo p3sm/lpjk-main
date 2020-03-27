@@ -427,7 +427,6 @@
   .logo {
     width: 90px;
     float: left;
-    margin-top: -52px;
     margin-right: 20px;
     margin-bottom: 50px;
   }
