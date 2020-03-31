@@ -58,12 +58,16 @@ class DocumentController extends Controller
             $from = Carbon::createFromFormat("d/m/Y", $param[0]);
             $to = Carbon::createFromFormat("d/m/Y", $param[1]);
             $as = $param[2];
+            $us = $param[3];
 
             $record = ApprovalTransaction::whereDate("created_at", ">=", $from->format('Y-m-d'))
             ->whereDate("created_at", "<=", $to->format('Y-m-d'));
       
             if($as)
               $record->where("id_asosiasi_profesi", $as);
+
+            if($us)
+              $record->where("id_unit_sertifikasi", $us);
 
             $data["transaction"] = $record->get();
             

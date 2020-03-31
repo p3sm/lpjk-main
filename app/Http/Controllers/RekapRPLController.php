@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ApprovalTransaction;
 use App\Asosiasi;
+use App\Ustk;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Carbon\Carbon;
@@ -15,16 +16,22 @@ class RekapRPLController extends Controller
     
     public function index(Request $request)
     {
+        $data['ustk']= Ustk::where("provinsi_id", env("PROVINSI_ID"))->get();
       $data['asosiasi'] = Asosiasi::orderBy("id_asosiasi", "asc")->get();
+
       $data['from'] = $request->from ? Carbon::createFromFormat("d/m/Y", $request->from) : Carbon::now()->subDays(1);
       $data['to'] = $request->to ? Carbon::createFromFormat("d/m/Y", $request->to) : Carbon::now();
       $data['as'] = $request->as;
+      $data['us'] = $request->us;
 
       $record = ApprovalTransaction::whereDate("created_at", ">=", $data['from']->format('Y-m-d'))
       ->whereDate("created_at", "<=", $data['to']->format('Y-m-d'));
 
       if($request->as)
         $record->where("id_asosiasi_profesi", $request->as);
+
+      if($request->us)
+        $record->where("id_unit_sertifikasi", $request->us);
       
       $data["record"] = $record->get();
 

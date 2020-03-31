@@ -35,15 +35,21 @@
               <div class="input-group-addon">to</div>
               <input type="text" name="to" class="form-control input-sm" value="{{$to->format("d/m/Y")}}">
             </div>
-            <label class="" for="">Asosiasi: </label>
+            {{-- <label class="" for="">Asosiasi: </label> --}}
             <select name="as" class="form-control input-sm">
               <option value="">-- Pilih Asosiasi --</option>
               @foreach ($asosiasi as $data)
                 <option value="{{$data->id_asosiasi}}" {{$as == $data->id_asosiasi ? "selected" : ""}}>{{$data->id_asosiasi}} - {{$data->nama}}</option>
               @endforeach
             </select>
+            <select name="us" class="form-control input-sm">
+              <option value="">-- Pilih USTK --</option>
+              @foreach ($ustk as $data)
+                <option value="{{$data->id_unit_sertifikasi}}" {{$us == $data->id_unit_sertifikasi ? "selected" : ""}}>{{$data->nama}}</option>
+              @endforeach
+            </select>
             <button type="submit" class="btn btn-primary btn-sm my-1">Apply</button>
-            <a class="btn btn-success btn-sm fancybox" href="javascript:;" data-src={{"/pdf?src=rekap&data=" . \Illuminate\Support\Facades\Crypt::encryptString($from->format("d/m/Y")  . "." . $to->format("d/m/Y") . "." . $as) . "&or=landscape"}}>CETAK</a>
+            <a class="btn btn-success btn-sm fancybox" href="javascript:;" data-src={{"/pdf?src=rekap&data=" . \Illuminate\Support\Facades\Crypt::encryptString($from->format("d/m/Y")  . "." . $to->format("d/m/Y") . "." . $as . "." . $us) . "&or=landscape"}}>CETAK</a>
           </form>
 
           @if(session()->get('success'))
