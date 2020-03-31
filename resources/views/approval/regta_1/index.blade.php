@@ -56,7 +56,9 @@
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
-            <button type="submit" name="submit" class="btn btn-primary">Cari</button>
+            <button type="submit" name="find" class="btn btn-primary">Cari ID</button>
+            <span> -- atau -- </span>
+            <a href="{{url("approval_1_regta/all")}}" class="btn btn-success">Cari Semua Data</a>
           </div>
           <!-- /.box-footer-->
         </form>
