@@ -44,4 +44,9 @@ class ApprovalTransaction extends Model
   {
     return $this->belongsTo('App\Kualifikasi', 'id_kualifikasi');
   }
+    
+  public function createdBy()
+  {
+    return $this->belongsTo('App\User', 'created_by');
+  }
 }

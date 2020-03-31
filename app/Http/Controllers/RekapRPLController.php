@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ApprovalTransaction;
 use App\Asosiasi;
+use App\UserAsosiasi;
 use App\Ustk;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,22 +17,37 @@ class RekapRPLController extends Controller
     
     public function index(Request $request)
     {
-        $data['ustk']= Ustk::where("provinsi_id", env("PROVINSI_ID"))->get();
+      $data['ustk']= Ustk::where("provinsi_id", env("PROVINSI_ID"))->get();
       $data['asosiasi'] = Asosiasi::orderBy("id_asosiasi", "asc")->get();
 
       $data['from'] = $request->from ? Carbon::createFromFormat("d/m/Y", $request->from) : Carbon::now()->subDays(1);
       $data['to'] = $request->to ? Carbon::createFromFormat("d/m/Y", $request->to) : Carbon::now();
+      $data['sr'] = $request->sr;
       $data['as'] = $request->as;
       $data['us'] = $request->us;
+      $data['te'] = $request->te;
+
+      if($request->as)
+        $data['team'] = UserAsosiasi::where("provinsi_id", env("PROVINSI_ID"))->where("asosiasi_id", $request->as)->get();
+      else
+        $data['team'] = UserAsosiasi::where("provinsi_id", env("PROVINSI_ID"))->get();
+
+      // dd($data['team']);
 
       $record = ApprovalTransaction::whereDate("created_at", ">=", $data['from']->format('Y-m-d'))
       ->whereDate("created_at", "<=", $data['to']->format('Y-m-d'));
+
+      if($request->sr)
+        $record->where("tipe_sertifikat", strtoupper($request->sr));
 
       if($request->as)
         $record->where("id_asosiasi_profesi", $request->as);
 
       if($request->us)
         $record->where("id_unit_sertifikasi", $request->us);
+
+      if($request->te)
+        $record->where("created_by", $request->te);
       
       $data["record"] = $record->get();
 

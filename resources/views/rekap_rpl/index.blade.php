@@ -36,20 +36,33 @@
               <input type="text" name="to" class="form-control input-sm" value="{{$to->format("d/m/Y")}}">
             </div>
             {{-- <label class="" for="">Asosiasi: </label> --}}
+            <select name="sr" class="form-control input-sm">
+              <option value="">-- Semua Sertifikat --</option>
+              <option value="ska" {{$sr == "ska" ? "selected" : ""}}>SKA</option>
+              <option value="skt" {{$sr == "skt" ? "selected" : ""}}>SKT</option>
+              </select>
             <select name="as" class="form-control input-sm">
-              <option value="">-- Pilih Asosiasi --</option>
+              <option value="">-- Semua Asosiasi --</option>
               @foreach ($asosiasi as $data)
                 <option value="{{$data->id_asosiasi}}" {{$as == $data->id_asosiasi ? "selected" : ""}}>{{$data->id_asosiasi}} - {{$data->nama}}</option>
               @endforeach
             </select>
             <select name="us" class="form-control input-sm">
-              <option value="">-- Pilih USTK --</option>
+              <option value="">-- Semua USTK --</option>
               @foreach ($ustk as $data)
                 <option value="{{$data->id_unit_sertifikasi}}" {{$us == $data->id_unit_sertifikasi ? "selected" : ""}}>{{$data->nama}}</option>
               @endforeach
             </select>
+            <select name="te" class="form-control input-sm">
+              <option value="">-- Semua User --</option>
+              @foreach ($team as $data)
+                @if($data->user)
+                <option value="{{$data->user_id}}" {{$te == $data->user_id ? "selected" : ""}}>{{$data->user->name}}</option>
+                @endif
+              @endforeach
+            </select>
             <button type="submit" class="btn btn-primary btn-sm my-1">Apply</button>
-            <a class="btn btn-success btn-sm fancybox" href="javascript:;" data-src={{"/pdf?src=rekap&data=" . \Illuminate\Support\Facades\Crypt::encryptString($from->format("d/m/Y")  . "." . $to->format("d/m/Y") . "." . $as . "." . $us) . "&or=landscape"}}>CETAK</a>
+            <a class="btn btn-success btn-sm fancybox" href="javascript:;" data-src={{"/pdf?src=rekap&data=" . \Illuminate\Support\Facades\Crypt::encryptString($from->format("d/m/Y")  . "." . $to->format("d/m/Y") . "." . $as . "." . $us . "." . $sr . "." . $te) . "&or=landscape"}}>CETAK</a>
           </form>
 
           @if(session()->get('success'))
@@ -96,7 +109,7 @@
                     <td>{{$result->id_unit_sertifikasi}}</td>
                     <td>{{$result->tgl_registrasi}}</td>
                     <td>{{$result->created_at}}</td>
-                    <td>{{$result->created_by}}</td>
+                    <td>{{$result->createdBy->name}}</td>
                   </tr>
                 @endforeach
               </tbody>
