@@ -32,6 +32,8 @@ class DocumentController extends Controller
                 $pengajuan = PengajuanNaikStatusTT::find($param["1"]);
             }
 
+            $data["user_verifikator"] = $pengajuan->user_verifikator;
+            $data["user_database"] = $pengajuan->user_database;
             $data["ttd_verifikator"] = $pengajuan->ttd_verifikator;
             $data["ttd_database"] = $pengajuan->ttd_database;
             

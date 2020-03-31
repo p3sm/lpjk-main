@@ -196,8 +196,8 @@
   <div class="ttd-box">
     <h4>Pemeriksa Kelengkapan</h4>
     <div class="ttd">
-      <img style="max-width: 180px;max-height: 130px;" src="{{asset('image/signature/verifikator/' . $ttd_verifikator)}}" />
-      <span>Armaisaraswati, A.Md</span>
+      <img style="max-width: 180px;max-height: 130px;" src="{{asset('image/signature/' . $ttd_verifikator)}}" />
+      <span>{{$user_verifikator}}</span>
     </div>
   </div>
   <div class="clearfix"></div>
@@ -335,11 +335,13 @@
     <h4>Verifikasi & Validasi</h4>
     <div class="ttd float" style="border-right:none">
       <span class="top">Database</span>
-      <img style="max-width: 121px;max-height: 130px;" src="{{asset('image/signature/database/' . $ttd_database)}}" />
+      <img style="max-width: 121px;max-height: 130px;" src="{{asset('image/signature/' . $ttd_database)}}" />
+      <span>{{$user_database}}</span>
     </div>
     <div class="ttd float">
       <span class="top">Verifikator</span>
-      <img style="max-width: 121px;max-height: 130px;" src="{{asset('image/signature/verifikator/' . $ttd_verifikator)}}" />
+      <img style="max-width: 121px;max-height: 130px;" src="{{asset('image/signature/' . $ttd_verifikator)}}" />
+      <span>{{$user_verifikator}}</span>
     </div>
     <div class="clearfix"></div>
   </div>
