@@ -33,9 +33,11 @@ class ApprovalRegtaStatus1Controller extends Controller
 
         $postData = [
             "status_99" => 1,
-            "id_status" => 0,
-            "ID_Personal" => $request->nik
-          ];
+            "id_status" => 0
+        ];
+
+        if($request->nik != "all") 
+            $postData["ID_Personal"] = $request->nik;
 
         $curl = curl_init();
         $header[] = "X-Api-Key:" . $key->lpjk_key;
