@@ -63,7 +63,7 @@ class BiodataController extends Controller
      */
     public function show(Request $request, $id_personal)
     {
-        $key = ApiKey::first();
+        $key = ApiKey::where('provinsi_id', Auth::user()->asosiasi->provinsi_id)->first();
 
         $postData = [
             "id_personal" => $id_personal,
@@ -75,7 +75,7 @@ class BiodataController extends Controller
         $header[] = "Token:" . $key->token;
         $header[] = "Content-Type:multipart/form-data";
         curl_setopt_array($curl, array(
-            CURLOPT_URL            => env("LPJK_ENDPOINT") . "Service/Biodata/Get",
+            CURLOPT_URL            => config("app.lpjk_endpoint") . "Service/Biodata/Get",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST  => "POST",
             CURLOPT_POSTFIELDS     => $postData,
@@ -133,7 +133,7 @@ class BiodataController extends Controller
     }
 
     private function getPendidikan($id_personal){
-        $key = ApiKey::first();
+        $key = ApiKey::where('provinsi_id', Auth::user()->asosiasi->provinsi_id)->first();
 
         $postData = [
             "id_personal" => $id_personal,
@@ -145,7 +145,7 @@ class BiodataController extends Controller
         $header[] = "Token:" . $key->token;
         $header[] = "Content-Type:multipart/form-data";
         curl_setopt_array($curl, array(
-            CURLOPT_URL            => env("LPJK_ENDPOINT") . "Service/Pendidikan/Get",
+            CURLOPT_URL            => config("app.lpjk_endpoint") . "Service/Pendidikan/Get",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST  => "POST",
             CURLOPT_POSTFIELDS     => $postData,
@@ -186,7 +186,7 @@ class BiodataController extends Controller
     }
 
     private function getProyek($id_personal){
-        $key = ApiKey::first();
+        $key = ApiKey::where('provinsi_id', Auth::user()->asosiasi->provinsi_id)->first();
 
         $postData = [
             "id_personal" => $id_personal,
@@ -198,7 +198,7 @@ class BiodataController extends Controller
         $header[] = "Token:" . $key->token;
         $header[] = "Content-Type:multipart/form-data";
         curl_setopt_array($curl, array(
-            CURLOPT_URL            => env("LPJK_ENDPOINT") . "Service/Proyek/Get",
+            CURLOPT_URL            => config("app.lpjk_endpoint") . "Service/Proyek/Get",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST  => "POST",
             CURLOPT_POSTFIELDS     => $postData,
@@ -237,7 +237,7 @@ class BiodataController extends Controller
     }
 
     private function getOrganisasi($id_personal){
-        $key = ApiKey::first();
+        $key = ApiKey::where('provinsi_id', Auth::user()->asosiasi->provinsi_id)->first();
 
         $postData = [
             "id_personal" => $id_personal,
@@ -249,7 +249,7 @@ class BiodataController extends Controller
         $header[] = "Token:" . $key->token;
         $header[] = "Content-Type:multipart/form-data";
         curl_setopt_array($curl, array(
-            CURLOPT_URL            => env("LPJK_ENDPOINT") . "Service/Organisasi/Get",
+            CURLOPT_URL            => config("app.lpjk_endpoint") . "Service/Organisasi/Get",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST  => "POST",
             CURLOPT_POSTFIELDS     => $postData,
@@ -288,7 +288,7 @@ class BiodataController extends Controller
     }
 
     private function getKursus($id_personal){
-        $key = ApiKey::first();
+        $key = ApiKey::where('provinsi_id', Auth::user()->asosiasi->provinsi_id)->first();
 
         $postData = [
             "id_personal" => $id_personal,
@@ -300,7 +300,7 @@ class BiodataController extends Controller
         $header[] = "Token:" . $key->token;
         $header[] = "Content-Type:multipart/form-data";
         curl_setopt_array($curl, array(
-            CURLOPT_URL            => env("LPJK_ENDPOINT") . "Service/Kursus/Get",
+            CURLOPT_URL            => config("app.lpjk_endpoint") . "Service/Kursus/Get",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST  => "POST",
             CURLOPT_POSTFIELDS     => $postData,
@@ -339,7 +339,7 @@ class BiodataController extends Controller
     }
 
     private function getKlasifikasiTA($id_personal){
-        $key = ApiKey::first();
+        $key = ApiKey::where('provinsi_id', Auth::user()->asosiasi->provinsi_id)->first();
 
         $postData = [
             "ID_Personal" => $id_personal,
@@ -352,7 +352,7 @@ class BiodataController extends Controller
         $header[] = "Token:" . $key->token;
         $header[] = "Content-Type:multipart/form-data";
         curl_setopt_array($curl, array(
-            CURLOPT_URL            => env("LPJK_ENDPOINT") . "Service/Klasifikasi/Get-TA",
+            CURLOPT_URL            => config("app.lpjk_endpoint") . "Service/Klasifikasi/Get-TA",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST  => "POST",
             CURLOPT_POSTFIELDS     => $postData,
@@ -394,7 +394,7 @@ class BiodataController extends Controller
     }
 
     private function getKlasifikasiTT($id_personal){
-        $key = ApiKey::first();
+        $key = ApiKey::where('provinsi_id', Auth::user()->asosiasi->provinsi_id)->first();
 
         $postData = [
             "ID_Personal" => $id_personal,
@@ -407,7 +407,7 @@ class BiodataController extends Controller
         $header[] = "Token:" . $key->token;
         $header[] = "Content-Type:multipart/form-data";
         curl_setopt_array($curl, array(
-            CURLOPT_URL            => env("LPJK_ENDPOINT") . "Service/Klasifikasi/Get-TT",
+            CURLOPT_URL            => config("app.lpjk_endpoint") . "Service/Klasifikasi/Get-TT",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST  => "POST",
             CURLOPT_POSTFIELDS     => $postData,
@@ -483,7 +483,7 @@ class BiodataController extends Controller
 
     public function upload(Request $request, $id)
     {
-        $key = ApiKey::first();
+        $key = ApiKey::where('provinsi_id', Auth::user()->asosiasi->provinsi_id)->first();
 
         $postData = [
           "id_personal"         => $request->query('id_personal'),
@@ -517,7 +517,7 @@ class BiodataController extends Controller
         $header[] = "Token:" . $key->token;
         $header[] = "Content-Type:multipart/form-data";
         curl_setopt_array($curl, array(
-            CURLOPT_URL            => env("LPJK_ENDPOINT") . "LPJK-Service/Biodata/Tambah",
+            CURLOPT_URL            => config("app.lpjk_endpoint") . "LPJK-Service/Biodata/Tambah",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST  => "POST",
             CURLOPT_POSTFIELDS     => $postData,
@@ -530,7 +530,7 @@ class BiodataController extends Controller
         if($objResponse = json_decode($response)){
             if($objResponse->message == "Data Biodata Tersebut Sudah Pernah Didaftarkan !"){
                 curl_setopt_array($curl, array(
-                    CURLOPT_URL            => env("LPJK_ENDPOINT") . "LPJK-Service/Biodata/Ubah",
+                    CURLOPT_URL            => config("app.lpjk_endpoint") . "LPJK-Service/Biodata/Ubah",
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_CUSTOMREQUEST  => "POST",
                     CURLOPT_POSTFIELDS     => $postData,
@@ -556,7 +556,7 @@ class BiodataController extends Controller
 
     public function uploadPendidikan(Request $request)
     {
-        $key = ApiKey::first();
+        $key = ApiKey::where('provinsi_id', Auth::user()->asosiasi->provinsi_id)->first();
 
         $postData = [
           "id_personal"          => $request->query('ID_Personal'),
@@ -576,7 +576,7 @@ class BiodataController extends Controller
         $header[] = "Token:" . $key->token;
         $header[] = "Content-Type:multipart/form-data";
         curl_setopt_array($curl, array(
-            CURLOPT_URL            => env("LPJK_ENDPOINT") . "LPJK-Service/Pendidikan/Tambah",
+            CURLOPT_URL            => config("app.lpjk_endpoint") . "LPJK-Service/Pendidikan/Tambah",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST  => "POST",
             CURLOPT_POSTFIELDS     => $postData,
@@ -600,7 +600,7 @@ class BiodataController extends Controller
 
     public function uploadPengalaman(Request $request)
     {
-        $key = ApiKey::first();
+        $key = ApiKey::where('provinsi_id', Auth::user()->asosiasi->provinsi_id)->first();
 
         $postData = [
           "id_personal"  => $request->query('id_personal'),
@@ -617,7 +617,7 @@ class BiodataController extends Controller
         $header[] = "Token:" . $key->token;
         $header[] = "Content-Type:multipart/form-data";
         curl_setopt_array($curl, array(
-            CURLOPT_URL            => env("LPJK_ENDPOINT") . "LPJK-Service/Proyek/Tambah",
+            CURLOPT_URL            => config("app.lpjk_endpoint") . "LPJK-Service/Proyek/Tambah",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST  => "POST",
             CURLOPT_POSTFIELDS     => $postData,
@@ -641,7 +641,7 @@ class BiodataController extends Controller
 
     public function uploadOrganisasi(Request $request)
     {
-        $key = ApiKey::first();
+        $key = ApiKey::where('provinsi_id', Auth::user()->asosiasi->provinsi_id)->first();
 
         $postData = [
           "id_personal"      => $request->query('ID_Personal'),
@@ -660,7 +660,7 @@ class BiodataController extends Controller
         $header[] = "Token:" . $key->token;
         $header[] = "Content-Type:multipart/form-data";
         curl_setopt_array($curl, array(
-            CURLOPT_URL            => env("LPJK_ENDPOINT") . "LPJK-Service/Organisasi/Tambah",
+            CURLOPT_URL            => config("app.lpjk_endpoint") . "LPJK-Service/Organisasi/Tambah",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST  => "POST",
             CURLOPT_POSTFIELDS     => $postData,
@@ -684,7 +684,7 @@ class BiodataController extends Controller
 
     public function uploadKursus(Request $request)
     {
-        $key = ApiKey::first();
+        $key = ApiKey::where('provinsi_id', Auth::user()->asosiasi->provinsi_id)->first();
 
         $postData = [
           "id_personal"               => $request->query('ID_Personal'),
@@ -703,7 +703,7 @@ class BiodataController extends Controller
         $header[] = "Token:" . $key->token;
         $header[] = "Content-Type:multipart/form-data";
         curl_setopt_array($curl, array(
-            CURLOPT_URL            => env("LPJK_ENDPOINT") . "LPJK-Service/Kursus/Tambah",
+            CURLOPT_URL            => config("app.lpjk_endpoint") . "LPJK-Service/Kursus/Tambah",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST  => "POST",
             CURLOPT_POSTFIELDS     => $postData,
@@ -727,7 +727,7 @@ class BiodataController extends Controller
 
     public function uploadSKA(Request $request)
     {
-        $key = ApiKey::first();
+        $key = ApiKey::where('provinsi_id', Auth::user()->asosiasi->provinsi_id)->first();
 
         $postData = [
           "id_personal"         => $request->query('ID_Personal'),
@@ -744,7 +744,7 @@ class BiodataController extends Controller
         $header[] = "Token:" . $key->token;
         $header[] = "Content-Type:multipart/form-data";
         curl_setopt_array($curl, array(
-            CURLOPT_URL            => env("LPJK_ENDPOINT") . "LPJK-Service/Klasifikasi/Tambah-TA",
+            CURLOPT_URL            => config("app.lpjk_endpoint") . "LPJK-Service/Klasifikasi/Tambah-TA",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST  => "POST",
             CURLOPT_POSTFIELDS     => $postData,
@@ -768,7 +768,7 @@ class BiodataController extends Controller
 
     public function uploadSKT(Request $request)
     {
-        $key = ApiKey::first();
+        $key = ApiKey::where('provinsi_id', Auth::user()->asosiasi->provinsi_id)->first();
 
         $postData = [
           "id_personal"         => $request->query('ID_Personal'),
@@ -786,7 +786,7 @@ class BiodataController extends Controller
         $header[] = "Token:" . $key->token;
         $header[] = "Content-Type:multipart/form-data";
         curl_setopt_array($curl, array(
-            CURLOPT_URL            => env("LPJK_ENDPOINT") . "LPJK-Service/Klasifikasi/Tambah-TT",
+            CURLOPT_URL            => config("app.lpjk_endpoint") . "LPJK-Service/Klasifikasi/Tambah-TT",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST  => "POST",
             CURLOPT_POSTFIELDS     => $postData,

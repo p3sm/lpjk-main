@@ -197,7 +197,7 @@ class SikiRegttController extends Controller
         $header[] = "Token:" . $reg->asosiasi->apikey->token;
         $header[] = "Content-Type:multipart/form-data";
         curl_setopt_array($curl, array(
-            CURLOPT_URL => env("LPJK_ENDPOINT") . "Service/Klasifikasi/" . ($reg->sync ? "Ubah" : "Tambah") . "-TT",
+            CURLOPT_URL => config("app.lpjk_endpoint") . "Service/Klasifikasi/" . ($reg->sync ? "Ubah" : "Tambah") . "-TT",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_CUSTOMREQUEST => "POST",
         CURLOPT_POSTFIELDS => $postData,
@@ -240,7 +240,7 @@ class SikiRegttController extends Controller
         $header[] = "Token:" . $reg->asosiasi->apikey->token;
         $header[] = "Content-Type:multipart/form-data";
         curl_setopt_array($curl, array(
-            CURLOPT_URL => env("LPJK_ENDPOINT") . "Service/History/TT",
+            CURLOPT_URL => config("app.lpjk_endpoint") . "Service/History/TT",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => $postData,
