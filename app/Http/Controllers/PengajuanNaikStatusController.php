@@ -25,8 +25,17 @@ class PengajuanNaikStatusController extends Controller
         $data['as'] = $request->as;
         $data['us'] = $request->us;
 
+
         $pengajuan = PengajuanNaikStatus::whereDate("created_at", ">=", $data['from']->format('Y-m-d'))
         ->whereDate("created_at", "<=", $data['to']->format('Y-m-d'));
+
+        if(Auth::user()->id != 1){
+            $pengajuan = $pengajuan->whereHas("createdBy", function ($query) {
+                $query->whereHas("asosiasi", function ($query2) {
+                    $query2->where("provinsi_id", Auth::user()->asosiasi->provinsi_id);
+                });
+            });
+        }
 
         if($request->as)
           $pengajuan->where("asosiasi", $request->as);
@@ -51,6 +60,14 @@ class PengajuanNaikStatusController extends Controller
 
         $pengajuan = PengajuanNaikStatusTT::whereDate("created_at", ">=", $data['from']->format('Y-m-d'))
         ->whereDate("created_at", "<=", $data['to']->format('Y-m-d'));
+
+        if(Auth::user()->id != 1){
+            $pengajuan = $pengajuan->whereHas("createdBy", function ($query) {
+                $query->whereHas("asosiasi", function ($query2) {
+                    $query2->where("provinsi_id", Auth::user()->asosiasi->provinsi_id);
+                });
+            });
+        }
 
         if($request->as)
           $pengajuan->where("asosiasi", $request->as);

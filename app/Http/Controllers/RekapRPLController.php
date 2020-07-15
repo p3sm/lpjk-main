@@ -17,7 +17,7 @@ class RekapRPLController extends Controller
     
     public function index(Request $request)
     {
-      $data['ustk']= Ustk::where("provinsi_id", env("PROVINSI_ID"))->get();
+      $data['ustk']= Ustk::where("provinsi_id", Auth::user()->asosiasi->provinsi_id)->get();
       $data['asosiasi'] = Asosiasi::orderBy("id_asosiasi", "asc")->get();
 
       $data['from'] = $request->from ? Carbon::createFromFormat("d/m/Y", $request->from) : Carbon::now()->subDays(1);
@@ -28,14 +28,22 @@ class RekapRPLController extends Controller
       $data['te'] = $request->te;
 
       if($request->as)
-        $data['team'] = UserAsosiasi::where("provinsi_id", env("PROVINSI_ID"))->where("asosiasi_id", $request->as)->get();
+        $data['team'] = UserAsosiasi::where("provinsi_id", Auth::user()->asosiasi->provinsi_id)->where("asosiasi_id", $request->as)->get();
       else
-        $data['team'] = UserAsosiasi::where("provinsi_id", env("PROVINSI_ID"))->get();
+        $data['team'] = UserAsosiasi::where("provinsi_id", Auth::user()->asosiasi->provinsi_id)->get();
 
       // dd($data['team']);
 
       $record = ApprovalTransaction::whereDate("created_at", ">=", $data['from']->format('Y-m-d'))
       ->whereDate("created_at", "<=", $data['to']->format('Y-m-d'));
+
+      if(Auth::user()->id != 1){
+        $record = $record->whereHas("createdBy", function ($query) {
+            $query->whereHas("asosiasi", function ($query2) {
+                $query2->where("provinsi_id", Auth::user()->asosiasi->provinsi_id);
+            });
+        });
+    }
 
       if($request->sr)
         $record->where("tipe_sertifikat", strtoupper($request->sr));
