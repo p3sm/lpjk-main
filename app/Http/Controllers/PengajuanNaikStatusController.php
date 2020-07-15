@@ -17,7 +17,7 @@ class PengajuanNaikStatusController extends Controller
     
     public function ska(Request $request)
     {
-        $data['ustk']= Ustk::where("provinsi_id", env("PROVINSI_ID"))->get();
+        $data['ustk']= Ustk::where("provinsi_id", Auth::user()->asosiasi->provinsi_id)->get();
         $data['asosiasi'] = Asosiasi::orderBy("id_asosiasi", "asc")->get();
 
         $data['from'] = $request->from ? Carbon::createFromFormat("d/m/Y", $request->from) : Carbon::now()->subDays(1);
@@ -41,7 +41,7 @@ class PengajuanNaikStatusController extends Controller
 
     public function skt(Request $request)
     {
-        $data['ustk']= Ustk::where("provinsi_id", env("PROVINSI_ID"))->get();
+        $data['ustk']= Ustk::where("provinsi_id", Auth::user()->asosiasi->provinsi_id)->get();
         $data['asosiasi'] = Asosiasi::orderBy("id_asosiasi", "asc")->get();
 
         $data['from'] = $request->from ? Carbon::createFromFormat("d/m/Y", $request->from) : Carbon::now()->subDays(1);
