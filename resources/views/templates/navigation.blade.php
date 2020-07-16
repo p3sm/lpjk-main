@@ -85,7 +85,7 @@
           </ul>
         </li> --}}
         <li class="treeview {{Request::is('biodata*') ? 'active' : ''}}">
-          <a href="{{ url('biodata') }}"><i class="fa fa-tasks"></i><span>Data Personal</span></a>
+          <a href="{{ url('biodata') }}"><i class="fa fa-tasks"></i><span>Data Personalia</span></a>
         </li>
         @endif
 
