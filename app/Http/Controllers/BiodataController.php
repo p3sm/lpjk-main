@@ -624,7 +624,7 @@ class BiodataController extends Controller
           "nama"                => $request->query('Nama'),
           "nama_tanpa_gelar"    => $request->query('nama_tanpa_gelar'),
           "alamat"              => $request->query('Alamat1'),
-          "kodepos"             => $request->query('Kodepos'),
+          "kodepos"             => $request->query('Kodepos') == "" || $request->query('Kodepos') == "0" ? "-" : $request->query('Kodepos'),
           "id_kabupaten_alamat" => $request->query('ID_Kabupaten_Alamat'),
           "tgl_lahir"           => $request->query('Tgl_Lahir'),
           "jenis_kelamin"       => $request->query('jenis_kelamin'),
