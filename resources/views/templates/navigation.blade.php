@@ -3,9 +3,9 @@
     <!-- Logo -->
     <a href="../../index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>LRI</b></span>
+      <span class="logo-mini"><b>LPJKP</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>LPJKP</b> Riau</span>
+      <span class="logo-lg"><b>LPJKP</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -85,7 +85,7 @@
           </ul>
         </li> --}}
         <li class="treeview {{Request::is('biodata*') ? 'active' : ''}}">
-          <a href="{{ url('biodata') }}"><i class="fa fa-tasks"></i><span>Data Personalia</span></a>
+          <a href="{{ url('biodata') }}"><i class="fa fa-tasks"></i><span>Data Personal</span></a>
         </li>
         @endif
 
