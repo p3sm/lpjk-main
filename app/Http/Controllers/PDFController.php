@@ -20,7 +20,7 @@ class PDFController extends Controller
         ));
       }
 
-      $pdf->addPage("https://bapel-dev.lpjkriau.org/" . $request->src . "?data=" . $request->data);
+      $pdf->addPage(env("APP_URL") . $request->src . "?data=" . $request->data);
       // $pdf->binary = 'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf';
       $pdf->binary = '/usr/local/bin/wkhtmltopdf';
 
