@@ -81,11 +81,11 @@ class BiodataController extends Controller
     
               if($local && $obj->response > 0){
                   $obj->result[0]->file = [
-                    "persyaratan_4" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_4,
-                    "persyaratan_5" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_5,
-                    "persyaratan_8" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_8,
-                    "persyaratan_11" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_11,
-                    "persyaratan_12" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_12,
+                    "persyaratan_4" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_4,
+                    "persyaratan_5" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_5,
+                    "persyaratan_8" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_8,
+                    "persyaratan_11" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_11,
+                    "persyaratan_12" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_12,
                   ];
               }
             }
@@ -188,9 +188,9 @@ class BiodataController extends Controller
     
               if($local){
                   $data->file = [
-                    "persyaratan_6" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_6,
-                    "persyaratan_7" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_7,
-                    "persyaratan_15" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_15,
+                    "persyaratan_6" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_6,
+                    "persyaratan_7" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_7,
+                    "persyaratan_15" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_15,
                   ];
               }
             }
@@ -241,7 +241,7 @@ class BiodataController extends Controller
     
               if($local){
                   $data->file = [
-                    "persyaratan_16" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_16,
+                    "persyaratan_16" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_16,
                   ];
               }
             }
@@ -292,7 +292,7 @@ class BiodataController extends Controller
     
               if($local){
                   $data->file = [
-                    "persyaratan_18" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_18,
+                    "persyaratan_18" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_18,
                   ];
               }
             }
@@ -343,7 +343,7 @@ class BiodataController extends Controller
     
               if($local){
                   $data->file = [
-                    "persyaratan_17" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_17,
+                    "persyaratan_17" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_17,
                   ];
               }
             }
@@ -394,10 +394,10 @@ class BiodataController extends Controller
     
               if($local){
                   $data->file = [
-                    "persyaratan_1" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_1,
-                    "persyaratan_2" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_2,
-                    "persyaratan_3" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_3,
-                    "persyaratan_13" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_13,
+                    "persyaratan_1" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_1,
+                    "persyaratan_2" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_2,
+                    "persyaratan_3" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_3,
+                    "persyaratan_13" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_13,
                   ];
               }
             }
@@ -451,10 +451,10 @@ class BiodataController extends Controller
     
               if($local){
                   $data->file = [
-                    "persyaratan_1" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_1,
-                    "persyaratan_2" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_2,
-                    "persyaratan_3" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_3,
-                    "persyaratan_13" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_13,
+                    "persyaratan_1" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_1,
+                    "persyaratan_2" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_2,
+                    "persyaratan_3" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_3,
+                    "persyaratan_13" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_13,
                   ];
               }
             }
@@ -506,9 +506,9 @@ class BiodataController extends Controller
     
               if($local){
                   $data->file = [
-                    "persyaratan_1" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_1,
-                    "persyaratan_2" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_2,
-                    "persyaratan_3" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_3,
+                    "persyaratan_1" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_1,
+                    "persyaratan_2" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_2,
+                    "persyaratan_3" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_3,
                   ];
               }
             }
@@ -562,9 +562,9 @@ class BiodataController extends Controller
     
               if($local){
                   $data->file = [
-                    "persyaratan_1" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_1,
-                    "persyaratan_2" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_2,
-                    "persyaratan_3" => env("DOCUMENT_ENDPOINT") . "storage/" . $local->persyaratan_3,
+                    "persyaratan_1" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_1,
+                    "persyaratan_2" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_2,
+                    "persyaratan_3" => config("app.doc_endpoint") . "storage/" . $local->persyaratan_3,
                   ];
               }
             }

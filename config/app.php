@@ -228,5 +228,6 @@ return [
     ],
 
     'lpjk_endpoint' => env('LPJK_ENDPOINT'),
+    'doc_endpoint' => env('DOCUMENT_ENDPOINT'),
 
 ];
