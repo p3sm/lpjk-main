@@ -17,7 +17,7 @@ class PengajuanNaikStatusController extends Controller
     
     public function ska(Request $request)
     {
-        $data['ustk']= Ustk::where("provinsi_id", env("PROVINSI_ID"))->get();
+        $data['ustk']= Ustk::where("provinsi_id", Auth::user()->asosiasi->provinsi_id)->get();
         $data['asosiasi'] = Asosiasi::orderBy("id_asosiasi", "asc")->get();
 
         $data['from'] = $request->from ? Carbon::createFromFormat("d/m/Y", $request->from) : Carbon::now()->subDays(1);
@@ -25,8 +25,17 @@ class PengajuanNaikStatusController extends Controller
         $data['as'] = $request->as;
         $data['us'] = $request->us;
 
+
         $pengajuan = PengajuanNaikStatus::whereDate("created_at", ">=", $data['from']->format('Y-m-d'))
         ->whereDate("created_at", "<=", $data['to']->format('Y-m-d'));
+
+        if(Auth::user()->id != 1){
+            $pengajuan = $pengajuan->whereHas("createdBy", function ($query) {
+                $query->whereHas("asosiasi", function ($query2) {
+                    $query2->where("provinsi_id", Auth::user()->asosiasi->provinsi_id);
+                });
+            });
+        }
 
         if($request->as)
           $pengajuan->where("asosiasi", $request->as);
@@ -41,7 +50,7 @@ class PengajuanNaikStatusController extends Controller
 
     public function skt(Request $request)
     {
-        $data['ustk']= Ustk::where("provinsi_id", env("PROVINSI_ID"))->get();
+        $data['ustk']= Ustk::where("provinsi_id", Auth::user()->asosiasi->provinsi_id)->get();
         $data['asosiasi'] = Asosiasi::orderBy("id_asosiasi", "asc")->get();
 
         $data['from'] = $request->from ? Carbon::createFromFormat("d/m/Y", $request->from) : Carbon::now()->subDays(1);
@@ -51,6 +60,14 @@ class PengajuanNaikStatusController extends Controller
 
         $pengajuan = PengajuanNaikStatusTT::whereDate("created_at", ">=", $data['from']->format('Y-m-d'))
         ->whereDate("created_at", "<=", $data['to']->format('Y-m-d'));
+
+        if(Auth::user()->id != 1){
+            $pengajuan = $pengajuan->whereHas("createdBy", function ($query) {
+                $query->whereHas("asosiasi", function ($query2) {
+                    $query2->where("provinsi_id", Auth::user()->asosiasi->provinsi_id);
+                });
+            });
+        }
 
         if($request->as)
           $pengajuan->where("asosiasi", $request->as);

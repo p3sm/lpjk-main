@@ -204,7 +204,7 @@ class SikiPersonalController extends Controller
         $header[] = "Token:" . $reg->asosiasi->apikey->token;
         $header[] = "Content-Type:multipart/form-data";
         curl_setopt_array($curl, array(
-        CURLOPT_URL => env("LPJK_ENDPOINT") . "Service/Biodata/Tambah",
+        CURLOPT_URL => config("app.lpjk_endpoint") . "Service/Biodata/Tambah",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_CUSTOMREQUEST => "POST",
         CURLOPT_POSTFIELDS => $postData,
@@ -215,7 +215,7 @@ class SikiPersonalController extends Controller
         if($objResponse = json_decode($response)){
             if($objResponse->message == "Data Biodata Tersebut Sudah Pernah Didaftarkan !"){
                 curl_setopt_array($curl, array(
-                    CURLOPT_URL => env("LPJK_ENDPOINT") . "Service/Biodata/Ubah",
+                    CURLOPT_URL => config("app.lpjk_endpoint") . "Service/Biodata/Ubah",
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_CUSTOMREQUEST => "POST",
                     CURLOPT_POSTFIELDS => $postData,

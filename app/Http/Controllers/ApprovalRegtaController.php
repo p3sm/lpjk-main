@@ -29,7 +29,7 @@ class ApprovalRegtaController extends Controller
     
     public function list(Request $request)
     {
-        $key = ApiKey::first();
+        $key = ApiKey::where('provinsi_id', Auth::user()->asosiasi->provinsi_id)->first();
 
         $postData = [
             "status_99" => 1,
@@ -44,7 +44,7 @@ class ApprovalRegtaController extends Controller
         $header[] = "Token:" . $key->token;
         $header[] = "Content-Type:multipart/form-data";
         curl_setopt_array($curl, array(
-            CURLOPT_URL => env("LPJK_ENDPOINT") . "LPJK-Service/Klasifikasi/Get-TA",
+            CURLOPT_URL => config("app.lpjk_endpoint") . "LPJK-Service/Klasifikasi/Get-TA",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => $postData,
@@ -69,7 +69,7 @@ class ApprovalRegtaController extends Controller
 
     public function approve(Request $request, $id)
     {
-        $key = ApiKey::first();
+        $key = ApiKey::where('provinsi_id', Auth::user()->asosiasi->provinsi_id)->first();
 
         $postData = [
           "id_personal"           => $request->query('ID_Personal'),
@@ -92,7 +92,7 @@ class ApprovalRegtaController extends Controller
         $header[] = "Token:" . $key->token;
         $header[] = "Content-Type:multipart/form-data";
         curl_setopt_array($curl, array(
-            CURLOPT_URL => env("LPJK_ENDPOINT") . "Service/History/TA",
+            CURLOPT_URL => config("app.lpjk_endpoint") . "Service/History/TA",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => $postData,

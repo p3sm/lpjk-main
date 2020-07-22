@@ -146,7 +146,7 @@ class SikiPendidikanController extends Controller
         $header[] = "Content-Type:multipart/form-data";
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => env("LPJK_ENDPOINT") . "Service/Pendidikan/" . ($pendidikan->sync ? "Ubah" : "Tambah"),
+        CURLOPT_URL => config("app.lpjk_endpoint") . "Service/Pendidikan/" . ($pendidikan->sync ? "Ubah" : "Tambah"),
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_CUSTOMREQUEST => "POST",
         CURLOPT_POSTFIELDS => $postData,
