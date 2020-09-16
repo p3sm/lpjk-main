@@ -702,8 +702,11 @@ class BiodataController extends Controller
           "jenjang"              => $request->query('Jenjang'),
           "jurusan"              => $request->query('Jurusan'),
           "no_ijazah"            => $request->query('No_Ijazah'),
+          "url_pdf_ijazah" => $request->query('persyaratan_6'),
+          "url_pdf_data_pendidikan" => $request->query('persyaratan_7'),
+          "url_pdf_data_surat_keterangan_dari_sekolah" => $request->query('persyaratan_15'),
         ];
-
+        
         $curl = curl_init();
         $header[] = "X-Api-Key:" . $key->lpjk_key;
         $header[] = "Token:" . $key->token;
@@ -743,8 +746,9 @@ class BiodataController extends Controller
           "tgl_selesai"  => $request->query('Tgl_Selesai'),
           "jabatan"      => $request->query('Jabatan'),
           "nilai_proyek" => $request->query('Nilai'),
+          "url_pdf_persyaratan_pengalaman_proyek" => $request->query('persyaratan_16'),
         ];
-
+        
         $curl = curl_init();
         $header[] = "X-Api-Key:" . $key->lpjk_key;
         $header[] = "Token:" . $key->token;
@@ -786,8 +790,9 @@ class BiodataController extends Controller
           "tgl_mulai"        => $request->query('Tgl_Mulai'),
           "tgl_selesai"      => $request->query('Tgl_Selesai'),
           "role_pekerjaan"   => $request->query('Role_Pekerjaan'),
+          "url_pdf_persyaratan_pengalaman_organisasi" => $request->query('persyaratan_18'),
         ];
-
+        
         $curl = curl_init();
         $header[] = "X-Api-Key:" . $key->lpjk_key;
         $header[] = "Token:" . $key->token;
@@ -829,8 +834,9 @@ class BiodataController extends Controller
           "tahun"                     => $request->query('Tahun'),
           "nama_kursus"               => $request->query('Nama_Kursus'),
           "no_sertifikat"             => $request->query('No_Sertifikat'),
+          "url_pdf_persyaratan_kursus" => $request->query('persyaratan_17'),
         ];
-
+        
         $curl = curl_init();
         $header[] = "X-Api-Key:" . $key->lpjk_key;
         $header[] = "Token:" . $key->token;
@@ -870,8 +876,12 @@ class BiodataController extends Controller
           "no_reg_asosiasi"     => $request->query('No_Reg_Asosiasi'),
           "id_unit_sertifikasi" => $request->query('id_unit_sertifikasi'),
           "id_permohonan"       => $request->query('id_permohonan'),
+          "url_pdf_surat_permohonan" => $request->query('persyaratan_1'),
+          "url_pdf_berita_acara_vva" => $request->query('persyaratan_2'),
+          "url_pdf_surat_permohonan_asosiasi" => $request->query('persyaratan_3'),
+          "url_pdf_penilaian_mandiri_f19" => $request->query('persyaratan_13'),
         ];
-
+        
         $curl = curl_init();
         $header[] = "X-Api-Key:" . $key->lpjk_key;
         $header[] = "Token:" . $key->token;
@@ -912,8 +922,11 @@ class BiodataController extends Controller
           "no_reg_asosiasi"     => $request->query('No_Reg_Asosiasi'),
           "id_unit_sertifikasi" => $request->query('id_unit_sertifikasi'),
           "id_permohonan"       => $request->query('id_permohonan'),
+          "url_pdf_surat_permohonan" => $request->query('persyaratan_1'),
+          "url_pdf_berita_acara_vva" => $request->query('persyaratan_2'),
+          "url_pdf_surat_permohonan_asosiasi" => $request->query('persyaratan_3'),
         ];
-
+        
         $curl = curl_init();
         $header[] = "X-Api-Key:" . $key->lpjk_key;
         $header[] = "Token:" . $key->token;
