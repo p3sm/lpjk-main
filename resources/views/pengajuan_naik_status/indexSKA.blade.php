@@ -92,8 +92,8 @@
                     <td>{{$result->kualifikasi}}</td>
                     <td>{{$result->asosiasi}}</td>
                     <td>{{$result->ustk}}</td>
-                    <td>{{$result->date}}</td>
-                    <td>{{$result->created_at}}</td>
+                    <td>{{\Carbon\Carbon::createFromFormat('Y-m-d', $result->date)->format("d-m-Y")}}</td>
+                    <td>{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $result->created_at, 'UTC')->setTimezone('Asia/Jakarta')->format("d-m-Y H:i:s")}}</td>
                     <td>{{$result->createdBy->name}}</td>
                     <td><a class="fancybox" href="javascript:;" data-src={{"/pdf?src=document&data=" . \Illuminate\Support\Facades\Crypt::encryptString("1." . $result->id  . "." . $result->id_personal  . "." . $result->asosiasi . "." . date('Y-m-d', strtotime($result->date)))}}>View</a></td>
                     <td>
