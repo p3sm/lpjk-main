@@ -706,8 +706,6 @@ class BiodataController extends Controller
           "url_pdf_data_pendidikan" => $request->query('persyaratan_7'),
           "url_pdf_data_surat_keterangan_dari_sekolah" => $request->query('persyaratan_15'),
         ];
-
-        dd($postData);
         
         $curl = curl_init();
         $header[] = "X-Api-Key:" . $key->lpjk_key;
@@ -750,8 +748,6 @@ class BiodataController extends Controller
           "nilai_proyek" => $request->query('Nilai'),
           "url_pdf_persyaratan_pengalaman_proyek" => $request->query('persyaratan_16'),
         ];
-
-        dd($postData);
         
         $curl = curl_init();
         $header[] = "X-Api-Key:" . $key->lpjk_key;
@@ -796,8 +792,6 @@ class BiodataController extends Controller
           "role_pekerjaan"   => $request->query('Role_Pekerjaan'),
           "url_pdf_persyaratan_pengalaman_organisasi" => $request->query('persyaratan_18'),
         ];
-
-        dd($postData);
         
         $curl = curl_init();
         $header[] = "X-Api-Key:" . $key->lpjk_key;
@@ -887,8 +881,6 @@ class BiodataController extends Controller
           "url_pdf_surat_permohonan_asosiasi" => $request->query('persyaratan_3'),
           "url_pdf_penilaian_mandiri_f19" => $request->query('persyaratan_13'),
         ];
-
-        dd($postData);
         
         $curl = curl_init();
         $header[] = "X-Api-Key:" . $key->lpjk_key;
@@ -934,8 +926,6 @@ class BiodataController extends Controller
           "url_pdf_berita_acara_vva" => $request->query('persyaratan_2'),
           "url_pdf_surat_permohonan_asosiasi" => $request->query('persyaratan_3'),
         ];
-
-        dd($postData);
         
         $curl = curl_init();
         $header[] = "X-Api-Key:" . $key->lpjk_key;
